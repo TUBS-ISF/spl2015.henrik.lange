@@ -1,0 +1,35 @@
+Lernprogram Feature Liste
+  Speichermöglichkeit für Lerninfos (Json, XML)
+    Import 
+      Lerninfos
+    Export 
+      Lerninfos
+      Benutzerdaten
+    Bearbeiten von Daten
+  Personendaten Speicherung
+    Profil
+    Highscore
+    Achievements
+    Statistiken
+      Verhältnis zu Richtig und Falsch
+    Wechsel zwischen Konten
+  Auswahl von Lernmethoden
+    Karteikarten
+    Lückentext
+    Auswahlfragen
+  Lernmodis
+    Prüfung
+    Lernmodus
+  Engine
+    Vergleichsmethoden
+      Vergleich einer Eingabe mit mehreren Lösungen
+      Vergleich 1 zu 1
+    Hilfen
+    Zufallsauswahl
+      Statisch (ohne beachtung von Verteilung bestimmter Eigenschaften)
+      Dynamisch (abwechslungsreiche Aufgaben)
+    Trainer
+  Oberfläche
+    Lerninfos in Tabellen ausgeben
+      Sortierung der Tabellen
+  
