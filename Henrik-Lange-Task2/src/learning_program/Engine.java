@@ -12,7 +12,6 @@ public class Engine {
 		
 	}
 	boolean useEngine(ArrayList<String> answer, String givenAnswer) {
-		System.out.println("Test");
 		if (Configuration.oneVsM) {
 			return compareAllAnswer(answer, givenAnswer);
 		} else {

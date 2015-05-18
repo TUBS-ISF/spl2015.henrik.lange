@@ -1,5 +1,6 @@
 package learning_program;
 
+import java.awt.List;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.InputMismatchException;
@@ -15,6 +16,7 @@ import java.util.Scanner;
 public class Learning_material {
 	Scanner sc = new Scanner(System.in);
 	ArrayList<Dataset> databank;
+	List themeList;
 	private Engine engine = new Engine();
 
 	public Learning_material(ArrayList<Dataset> databank) {
@@ -101,67 +103,133 @@ public class Learning_material {
 
 	void startLearning() {
 		while (true) {
-			System.out.println("Waehlen sie den Modus");
-			System.out.println("[1] Karteikarten");
-			System.out.println("[2] Lueckentext");
-			System.out.println("[3] Multiply Choice");
-			System.out.println("[4] zurück");
-			String option = sc.next();
-			if (option.equals("1")) {
-				System.out.println("Karteikarten");
-				if (Configuration.topDown) {
-					for (int i = 0; i < databank.size(); i++) {
-						flashcard(databank.get(i));
-					}
-				} else {
-					for (int i = 0; i < databank.size(); i++) {
-						flashcard(databank.get(engine.randomQuestion(databank
-								.size())));
-					}
-
+			boolean stopLearning = false;
+			String newTheme = "";
+			String choosenTheme = "";
+			themeList = new List();
+			System.out.println("Waehlen Sie das Thema");
+			for (int i = 0; i < databank.size(); i++) {
+				if (!databank.get(i).getTheme().equals(newTheme)) {
+					themeList.add(databank.get(i).getTheme());
+					newTheme = databank.get(i).getTheme();
 				}
-			} else if (option.equals("2")) {
-				System.out.println("Lueckentext");
-				if (Configuration.topDown) {
-					for (int i = 0; i < databank.size(); i++) {
-						choze_test(databank.get(i));
+			}
+			for (int i = 0; i < themeList.getItemCount(); i++) {
+				System.out.println("[" + (i + 1) + "] Thema: "
+						+ themeList.getItem(i));
+			}
+			System.out.println("[" + (themeList.getItemCount() + 1) + "] zurück");
+			// Themen Auswahl nur 1
+			while (true) {
+				try {
+					int choice = sc.nextInt();
+					if (choice > themeList.getItemCount() + 1 || choice <= 0) {
+						System.out.println("Zahl ist nicht im Bereich!");
+						continue;
 					}
-				} else {
-					for (int i = 0; i < databank.size(); i++) {
-						choze_test(databank.get(engine.randomQuestion(databank
-								.size())));
+					if (choice == (themeList.getItemCount() + 1)) {
+						stopLearning = true;
+						break;
 					}
-
+					choosenTheme = themeList.getItem(choice - 1);
+					break;
+				} catch (InputMismatchException e) {
+					String errStr = sc.nextLine();
+					System.out.println("Bitte eine Zahl eingeben, " + errStr
+							+ " ist keine gültige!");
+					continue;
 				}
-			} else if (option.equals("3")) {
-				System.out.println("Multiply Choice");
-				if (Configuration.topDown) {
-					for (int i = 0; i < databank.size(); i++) {
-						if (databank.get(i).isMultiply_choice()) {
-							mutiply_choice(databank.get(i));
-						} else {
-
-						}
-
-					}
-				} else {
-					for (int i = 0; i < databank.size(); i++) {
-						Dataset buffData = databank.get(engine
-								.randomQuestion(databank.size()));
-						while (!buffData.isMultiply_choice()) {
-							buffData = databank.get(engine
-									.randomQuestion(databank.size()));
-						}
-						mutiply_choice(buffData);
-					}
-
-				}
-			} else if (option.equals("4")) {
-				break;
-			} else {
-				continue;
 			}
 
+			while (true) {
+				if (stopLearning) {
+					break;
+				}
+				System.out.println("Waehlen sie den Modus");
+				System.out.println("[1] Karteikarten");
+				System.out.println("[2] Lueckentext");
+				System.out.println("[3] Multiply Choice");
+				System.out.println("[4] zurück");
+				String option = sc.next();
+				if (option.equals("1")) {
+					System.out.println("Karteikarten");
+					if (Configuration.topDown) {
+						for (int i = 0; i < databank.size(); i++) {
+							if (databank.get(i).getTheme().equals(choosenTheme)) {
+								flashcard(databank.get(i));
+							}
+
+						}
+					} else {
+						for (int i = 0; i < databank.size(); i++) {
+							int randQue = engine
+									.randomQuestion(databank.size());
+							if (databank.get(randQue).getTheme()
+									.equals(choosenTheme)) {
+								flashcard(databank.get(randQue));
+							} else {
+								i--;
+							}
+						}
+
+					}
+				} else if (option.equals("2")) {
+					System.out.println("Lueckentext");
+					if (Configuration.topDown) {
+						for (int i = 0; i < databank.size(); i++) {
+							if (databank.get(i).getTheme().equals(choosenTheme)) {
+								choze_test(databank.get(i));
+							}
+						}
+					} else {
+						for (int i = 0; i < databank.size(); i++) {
+							int randQue = engine
+									.randomQuestion(databank.size());
+							if (databank.get(randQue).getTheme()
+									.equals(choosenTheme)) {
+								choze_test(databank.get(randQue));
+							} else {
+								i--;
+							}
+						}
+					}
+				} else if (option.equals("3")) {
+					System.out.println("Multiply Choice");
+					if (Configuration.topDown) {
+						for (int i = 0; i < databank.size(); i++) {
+							if (databank.get(i).getTheme().equals(choosenTheme)) {
+								if (databank.get(i).isMultiply_choice()) {
+									mutiply_choice(databank.get(i));
+								} else {
+									i--;
+								}
+							} else {
+								i--;
+							}
+
+						}
+					} else {
+						for (int i = 0; i < databank.size(); i++) {
+							Dataset buffData = databank.get(engine
+									.randomQuestion(databank.size()));
+							while (!buffData.isMultiply_choice()
+									|| !buffData.getTheme()
+											.equals(choosenTheme)) {
+								buffData = databank.get(engine
+										.randomQuestion(databank.size()));
+							}
+							mutiply_choice(buffData);
+						}
+					}
+				} else if (option.equals("4")) {
+					break;
+				} else {
+					continue;
+				}
+			}
+			if (stopLearning) {
+				break;
+			}
 		}
 
 	}

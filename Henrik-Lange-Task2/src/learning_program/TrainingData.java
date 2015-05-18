@@ -12,12 +12,15 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
 /**
  * Databank with utility methods
+ * 
  * @author Henrik Lange
  *
  */
@@ -244,6 +247,45 @@ class TrainingData {
 						}
 						saveDatabank();
 						printDatabank();
+					} else if (option.equals("n")) {
+						// to delete more than one entry
+						while (true) {
+							printDatabank();
+							boolean deleteAction = true;
+							int entry = 0;
+							while (true) {
+								try {
+									System.out
+											.print("Geben Sie den Eintrag an der gelöscht werden soll, falls Sie fertig sind geben sie [n] ein:");
+									entry = sc.nextInt();
+									if (entry > databank.size() || entry < 0) {
+										System.out
+												.println("Ungueltiger Bereich");
+										continue;
+									}
+									break;
+								} catch (InputMismatchException e) {
+									String errStr = sc.next();
+									if (errStr.equals("n")) {
+										deleteAction = false;
+										break;
+									} else {
+										System.out
+												.println("Bitte eine Zahl eingeben, "
+														+ errStr
+														+ " ist keine!");
+										continue;
+									}
+
+								}
+							}
+							if (deleteAction) {
+								databank.remove(entry);
+								saveDatabank();
+							} else {
+								break;
+							}
+						}
 					}
 				} else {
 					System.out.println("keine Daten");
@@ -274,7 +316,7 @@ class TrainingData {
 						}
 					}
 					for (int i = 0; i < countAnswer; i++) {
-						System.out.print("Antwort " + i+1 + ": ");
+						System.out.print("Antwort " + i + 1 + ": ");
 						answer.add(ssc.nextLine());
 					}
 
@@ -304,7 +346,7 @@ class TrainingData {
 						}
 					}
 					for (int i = 0; i < countWrongAnswer; i++) {
-						System.out.print("Falsche Antwort " + i+1 + ": ");
+						System.out.print("Falsche Antwort " + i + 1 + ": ");
 						wrongAnswer.add(ssc.nextLine());
 					}
 					System.out.print("Thema: ");
@@ -355,6 +397,12 @@ class TrainingData {
 	}
 
 	private void saveDatabank() {
+		Collections.sort(databank, new Comparator<Dataset>() {
+			public int compare(Dataset set1, Dataset set2) {
+
+				return set1.getTheme().compareTo(set2.getTheme());
+			}
+		});
 		OutputStream outputStream = null;
 		try {
 			outputStream = new FileOutputStream(saveData);
@@ -377,7 +425,15 @@ class TrainingData {
 	 * Print out the databank with the position in the array
 	 */
 	private void printDatabank() {
+		String activeTheme = databank.get(0).getTheme();
+		System.out.println(activeTheme + ":");
 		for (int i = 0; i < databank.size(); i++) {
+			if (!activeTheme.equals(databank.get(i).getTheme())) {
+				System.out.println();
+				activeTheme = databank.get(i).getTheme();
+				System.out.println(activeTheme + ":");
+				System.out.print(i + " " + databank.get(i));
+			}
 			System.out.print(i + " " + databank.get(i));
 		}
 	}
