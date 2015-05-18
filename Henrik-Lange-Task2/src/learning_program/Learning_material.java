@@ -50,7 +50,9 @@ public class Learning_material {
 	 */
 	void flashcard(Dataset data) {
 		System.out.println("Frage: " + data.getQuestion());
-		String buffer = sc.nextLine();
+		Scanner scc = new Scanner(System.in);
+		scc.useDelimiter("//n");
+		String buffer = scc.nextLine();
 		for (int i = 0; i < data.getAnswer().size(); i++) {
 			System.out.println("Antwort: " + data.getAnswer().get(i));
 		}
