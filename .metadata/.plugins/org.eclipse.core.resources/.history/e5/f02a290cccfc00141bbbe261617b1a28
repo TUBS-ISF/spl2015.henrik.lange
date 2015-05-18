@@ -1,0 +1,18 @@
+/**
+ * 
+ */
+package learning_program;
+
+/**
+ * Runtime variables
+ * @author Henrik's
+ *
+ */
+public class conf {
+
+	/**
+	 * 
+	 */
+	boolean oneVsM = true; //if false, than it will only compare the first entry
+
+}

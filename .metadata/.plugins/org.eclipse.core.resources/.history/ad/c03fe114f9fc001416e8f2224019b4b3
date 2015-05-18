@@ -1,0 +1,18 @@
+package learning_program;
+
+public class Learning_Program {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		TrainingData tr = new TrainingData();
+		Learning_material lr = new Learning_material(tr.getDatabank());
+//		for(int i = 0;i<tr.getDatabank().size();i++){
+//			System.out.print(tr.getDatabank().get(i));
+//			System.out.println();
+//		}
+		//tr.importData("Data/Training_Data.txt","default");
+		//tr.exportData("Data/Training_Data_export.txt");
+		tr.editDatabank();
+	}
+
+}

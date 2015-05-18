@@ -1,3 +1,0 @@
-Hello;Hallo;3
-World;Welt;2
-also;ebenfalls|auch;3

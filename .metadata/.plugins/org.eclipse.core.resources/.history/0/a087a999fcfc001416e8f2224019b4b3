@@ -1,0 +1,8 @@
+
+
+public class Conf {
+	public static boolean oneVsM = true; // if false, than it will only compare
+											// the first entry
+	public static boolean topDown = true;
+
+}

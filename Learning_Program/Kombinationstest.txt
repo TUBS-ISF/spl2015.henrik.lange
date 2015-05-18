@@ -1,0 +1,10 @@
+oneVsM: Bei True werden alle möglichen Einträge Kontrolliert, bei False nur das erste. 
+topDown: Bei True wird die Datenbank von oben nach unten durchgegangen, bei False werden zufällig Stellen in der Datenbank gesucht
+
+oneVsM: True
+topDown: False
+Die einträge werden zufällig ausgewählt und es werden mehrere Antworten akzeptiert
+
+oneVsM: False
+topDown: True
+Die einträge werden von oben nach unten ausgewählt und es wird nur die erste Antwort akzeptiert

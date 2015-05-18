@@ -1,0 +1,19 @@
+package learning_program;
+
+import java.util.ArrayList;
+
+public class Engine {
+
+	public Engine() {
+		// TODO Auto-generated constructor stub
+	}
+	boolean compareOneAnswer(ArrayList<String> answer,String givenAnswer ){
+		if(answer.contains(givenAnswer)){
+			return true;
+		}else {
+			return false;
+		}
+		
+	}
+
+}

@@ -1,0 +1,41 @@
+package learning_program;
+
+import java.util.ArrayList;
+
+public class Engine {
+	ArrayList<Dataset> databank;
+	public Engine(ArrayList<Dataset> databank){
+		this.databank=databank;
+	}
+
+	boolean useEngine(ArrayList<String> answer, String givenAnswer) {
+		if (Conf.oneVsM) {
+			return compareAllAnswer(answer, givenAnswer);
+		} else {
+			return compareOneAnswer(answer, givenAnswer);
+		}
+
+	}
+
+	private boolean compareAllAnswer(ArrayList<String> answer,
+			String givenAnswer) {
+		if (answer.contains(givenAnswer)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	private boolean compareOneAnswer(ArrayList<String> answer,
+			String givenAnswer) {
+		if (answer.get(0).equals(givenAnswer)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	private void topDown(){
+		
+	}
+
+}

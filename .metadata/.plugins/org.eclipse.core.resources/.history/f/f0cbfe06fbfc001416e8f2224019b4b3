@@ -1,0 +1,141 @@
+package learning_program;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.InputMismatchException;
+import java.util.Random;
+import java.util.Scanner;
+
+/**
+ * Is a class for different learn methods
+ * 
+ * @author Henrik's
+ *
+ */
+public class Learning_material {
+	Scanner sc = new Scanner(System.in);
+	ArrayList<Dataset> databank;
+	private Engine engine;
+
+	public Learning_material(ArrayList<Dataset> databank) {
+		this.databank = databank;
+		//sc.useDelimiter("//n");
+	}
+
+	/**
+	 * Show the question and the user needs to answer this question
+	 * 
+	 * @param data
+	 */
+	void choze_test(Dataset data) {
+		//sc.useDelimiter("\\n");
+		System.out.print(data.getQuestion()+": ");
+		String answer = " ";
+		answer = sc.next();
+		System.out.println(data.getAnswer());
+		if (data.getAnswer().contains(answer))) {
+			System.out.println("Ihre Antwort ist Korrekt!");
+		} else {
+			System.out.println("Ihre Antwort ist Falsch!");
+			System.out.println("Richtig ist: " + data.getAnswer().get(0));
+		}
+	}
+
+	/**
+	 * Show question and with a press the answers will be shown
+	 * 
+	 * @param data
+	 */
+	void flashcard(Dataset data) {
+		System.out.println(data.getQuestion());
+		String buffer = sc.nextLine();
+		for (int i = 0; i < data.getAnswer().size(); i++) {
+			System.out.println(data.getAnswer().get(i));
+		}
+	}
+
+	/**
+	 * This Method needs answers which are wrong
+	 * 
+	 * @param data
+	 */
+	void mutiply_choice(Dataset data) {
+		Random rand = new Random();
+		int answer;
+		System.out.println(data.getQuestion());
+		ArrayList<String> answerOption = new ArrayList<String>();
+		answerOption.add(data.getAnswer().get(
+				rand.nextInt(data.getAnswer().size()))); // Wählt eine zufällige
+															// richtige Antwort
+		String correctAnswer = answerOption.get(0);
+		answerOption.addAll(data.getWrongAnswers());
+		Collections.shuffle(answerOption);
+		int correctPosition = answerOption.indexOf(correctAnswer) + 1;
+		for (int i = 1; i <= answerOption.size(); i++) {
+			System.out.println("[" + i + "] " + answerOption.get(i - 1));
+		}
+		while (true) {
+			try {
+				answer = sc.nextInt();
+				if (answer > answerOption.size() || answer < 0) {
+					System.out.println("Zahl ist nicht im Bereich!");
+					continue;
+				}
+				break;
+			} catch (InputMismatchException e) {
+				String errStr = sc.nextLine();
+				System.out.println("Bitte eine Zahl eingeben, " + errStr
+						+ " ist keine gültige!");
+				continue;
+			}
+		}
+		if (answer == correctPosition) {
+			System.out.println("Die Antwort war Korrekt!");
+		} else {
+			System.out
+					.println("Die Antwort war falsch, korrekt wäre die Antwort '"
+							+ correctAnswer + "'");
+		}
+
+	}
+
+	void startLearning() {
+		while (true) {
+			System.out.println("Waehlen sie den Modus");
+			System.out.println("[1] Karteikarten");
+			System.out.println("[2] Lueckentext");
+			System.out.println("[3] Multiply Choice");
+			System.out.println("[4] zurück");
+			String option = sc.next();
+			if (option.equals("1")) {
+				System.out.println("Karteikarten");
+				if (Conf.topDown) {
+					for (int i = 0; i < databank.size(); i++) {
+						flashcard(databank.get(i));
+					}
+				}
+			} else if (option.equals("2")) {
+				System.out.println("Lueckentext");
+				if (Conf.topDown) {
+					for (int i = 0; i < databank.size(); i++) {
+						choze_test(databank.get(i));
+					}
+				}
+			} else if (option.equals("3")) {
+				System.out.println("Multiply Choice");
+				if (Conf.topDown) {
+					for (int i = 0; i < databank.size(); i++) {
+						mutiply_choice(databank.get(i));
+					}
+				}
+			} else if (option.equals("4")) {
+				break;
+			} else {
+				continue;
+			}
+
+		}
+
+	}
+
+}

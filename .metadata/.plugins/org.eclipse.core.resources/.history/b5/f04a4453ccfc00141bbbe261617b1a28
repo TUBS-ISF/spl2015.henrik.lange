@@ -1,0 +1,27 @@
+package learning_program;
+
+import java.util.ArrayList;
+
+public class Engine {
+
+	boolean useEngine(ArrayList<String> answer, String givenAnswer){
+		
+	}
+
+	private boolean compareAllAnswer(ArrayList<String> answer, String givenAnswer) {
+		if (answer.contains(givenAnswer)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	private boolean compareOneAnswer(ArrayList<String> answer, String givenAnswer) {
+		if (answer.get(0).equals(givenAnswer)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+}

@@ -1,0 +1,298 @@
+package learning_program;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.InputMismatchException;
+import java.util.Scanner;
+import java.util.StringTokenizer;
+
+/**
+ * 
+ * @author Henrik's Load the Database
+ *
+ */
+class TrainingData {
+	private ArrayList<Dataset> databank = new ArrayList<Dataset>();
+	private String question;
+	private ArrayList<String> answer = new ArrayList<String>();
+	private StringTokenizer lineReader;
+	private StringTokenizer answerReader;
+	OutputStream outputStream = null;
+	String saveData = "data.ser"; // Destination of the savepoint
+
+	TrainingData() {
+		// load data.ser
+		loadDatabank();
+	}
+
+	ArrayList<Dataset> getDatabank() {
+		return databank;
+	}
+
+	void importData(String filename, String theme) {
+		try {
+			// initiate all reader
+			FileReader datareader = new FileReader(filename);
+			BufferedReader br = new BufferedReader(datareader);
+			// Read first line
+			String data = br.readLine();
+			// test if data is empty
+			while (data != null) {
+				// delete every Object in the arraylist from answer for a new
+				// dataset
+				answer.clear();
+				// Set delimiter char
+				lineReader = new StringTokenizer(data, ";");
+				// Read first token (question)
+				question = lineReader.nextToken();
+				// The next Token is the answer and sometimes it does not give
+				// only 1 answer
+				answerReader = new StringTokenizer(lineReader.nextToken(), "|");
+				while (answerReader.countTokens() > 0) {
+					answer.add(answerReader.nextToken());
+				}
+
+				if (lineReader.countTokens() == 0) {
+					// no points or alternative wrong answer
+					ArrayList<String> buf = new ArrayList<String>();
+					databank.add(new Dataset(question, answer, 0, buf, theme));
+
+				} else if (lineReader.countTokens() == 1) {
+					// Points but no alternative wrong answer
+					ArrayList<String> buf = new ArrayList<String>();
+					databank.add(new Dataset(question, answer, Integer
+							.parseInt(lineReader.nextToken()), buf, theme));
+				} else if (lineReader.countTokens() == 2) {
+					// everything
+					int points = Integer.parseInt(lineReader.nextToken());
+					ArrayList<String> wrongAnswer = new ArrayList<String>();
+					answerReader = new StringTokenizer(lineReader.nextToken(),
+							"|");
+					while (answerReader.countTokens() > 0) {
+						wrongAnswer.add(answerReader.nextToken());
+					}
+					databank.add(new Dataset(question, answer, points,
+							wrongAnswer, theme));
+				} else {
+					// something gone wrong
+					System.out.println("unsupported number of entrys");
+				}
+				data = br.readLine();
+			}
+
+		} catch (IOException nofile) {
+			System.out.println(nofile);
+
+		}
+		// Save databank in data.ser
+		saveDatabank();
+	}
+
+	void exportData(String destination) {
+		Scanner sc = new Scanner(System.in);
+
+		try {
+			File file = new File(destination);
+			FileWriter fw = null;
+
+			if (file.exists()) {
+				System.out
+						.println("Die Datei existiert schon, soll sie geloescht [d], ergaenzt [e] oder der Vorgang abgebrochen [a] werden?");
+				String option = sc.next();
+				if (option.equals("d")) {
+					file.delete();
+					System.out.println("Datei wurde geloescht");
+				} else if (option.equals("e")) {
+					System.out.println("Datei wird ergänzt");
+
+				} else if (option.equals("a")) {
+					System.out.println("Die Operation wird abgebrochen");
+					return;
+				}
+
+			}
+			System.out.println("Export beginnt");
+			fw = new FileWriter(file.getPath(), true);
+
+			PrintWriter pw = new PrintWriter(fw);
+			for (int i = 0; i < databank.size(); i++) {
+				pw.print(databank.get(i).getQuestion());
+				pw.print(";");
+				pw.print(databank.get(i).getAnswer().get(0));
+				if (databank.get(i).getAnswer().size() > 1) {
+					if (databank.get(i).getAnswer().size() > 2) {
+						for (int j = 1; j < databank.get(i).getAnswer().size() - 1; j++) {
+							pw.print(databank.get(i).getAnswer().get(j));
+							pw.print("|");
+						}
+					}
+					pw.print("|");
+					pw.print(databank.get(i).getAnswer()
+							.get(databank.get(i).getAnswer().size() - 1));
+				}
+
+				pw.print(";");
+				pw.print(databank.get(i).getPoints());
+
+				pw.print(";");
+				if (databank.get(i).getWrongAnswers().size() > 0) {
+					pw.print(databank.get(i).getWrongAnswers().get(0));
+					if (databank.get(i).getWrongAnswers().size() > 1) {
+						pw.print("|");
+						if (databank.get(i).getWrongAnswers().size() > 2) {
+							for (int j = 1; j < databank.get(i)
+									.getWrongAnswers().size() - 1; j++) {
+								pw.print(databank.get(i).getWrongAnswers()
+										.get(j));
+								pw.print("|");
+							}
+						}
+						// pw.print("|");
+						pw.print(databank
+								.get(i)
+								.getWrongAnswers()
+								.get(databank.get(i).getWrongAnswers().size() - 1));
+					}
+				}
+				pw.print(";");
+
+				pw.println(databank.get(i).getTheme());
+			}
+
+			fw.flush();
+			fw.close();
+
+			pw.flush();
+			pw.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	void editDatabank() {
+		int start = 0;
+		int end = 0;
+		printDatabank();
+		System.out.println("Art der Bearbeitung?");
+		System.out.println("[1] Einträge Löschen");
+		System.out.println("[2] Einträge verändern");
+		System.out.println("[3] Datenbank löschen");
+		System.out.println("[4] Import Datei einlesen");
+		System.out.println("[5] zurück");
+		Scanner sc = new Scanner(System.in);
+		String option = sc.next();
+		if (option.equals("1")) {
+			System.out
+					.println("Soll ein Bereich von Einträgen gelöscht werden? [j] oder [n]");
+			option = sc.next();
+			if (option.equals("j")) {
+				printDatabank();
+				while (true) {
+					try {
+						System.out
+								.print("Geben Sie die erste Nummer des Bereiches an:");
+						start = sc.nextInt();
+						break;
+					} catch (InputMismatchException e) {
+						String errStr = sc.next();
+						System.out.println("Bitte eine Zahl eingeben, "
+								+ errStr + " ist keine!");
+						continue;
+					}
+				}
+				while (true) {
+					try {
+						System.out
+								.print("Geben Sie die letzte Nummer des Bereiches an:");
+						end = sc.nextInt();
+						break;
+					} catch (InputMismatchException e) {
+						String errStr = sc.next();
+						System.out.println("Bitte eine Zahl eingeben, "
+								+ errStr + " ist keine!");
+						continue;
+					}
+				}
+				for (int i = start; i < end; i++) {
+					databank.remove(i);
+				}
+				saveDatabank();
+				printDatabank();
+			}
+		} else if (option.equals("2")) {
+			System.out.println("Datei wird ergänzt");
+
+		} else if (option.equals("3")) {
+			System.out.println("Die Datenbank wird gelöscht");
+			databank.clear();
+			saveDatabank();
+		} else if (option.equals("4")) {
+			System.out.println("Import Datei einlesen");
+			System.out.println("Geben sie den Pfad zur Datei an: ");
+			String path = sc.next();
+			System.out.println("Geben sie das Thema an: ");
+			String theme = sc.next();
+			importData(path, theme);
+		}
+	}
+
+	private void loadDatabank() {
+		File file = new File(saveData);
+		if (file.exists()) {
+			try {
+				FileInputStream inputStream = new FileInputStream(saveData);
+				ObjectInputStream objectInput = new ObjectInputStream(
+						inputStream);
+				databank = (ArrayList<Dataset>) objectInput.readObject();
+			} catch (IOException e) {
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	private void saveDatabank() {
+		OutputStream outputStream = null;
+		try {
+			// Byteorientierten Ausgabekanal Öffnen
+			outputStream = new FileOutputStream(saveData);
+
+			// Objektausgabekanal für Serialisierung Öffnen
+			ObjectOutputStream objectOutput = new ObjectOutputStream(
+					outputStream);
+
+			// Objekte serialisiert in Datei ausgeben
+			objectOutput.writeObject(databank);
+
+			// Ausgabekanal schließen
+			objectOutput.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				outputStream.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	/**
+	 * Print out the databank with the position in the array
+	 */
+	private void printDatabank(){
+		for (int i = 0; i < databank.size(); i++) {
+			System.out.print(i + " " + databank.get(i));
+		}
+	}
+}

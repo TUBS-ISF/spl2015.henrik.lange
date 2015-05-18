@@ -1,0 +1,10 @@
+package learning_program;
+
+public class profile {
+	private int id;
+
+	public profile() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

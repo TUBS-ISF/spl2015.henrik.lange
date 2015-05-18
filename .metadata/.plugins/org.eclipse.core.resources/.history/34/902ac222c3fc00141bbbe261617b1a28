@@ -1,0 +1,13 @@
+package learning_program;
+
+public class profile {
+	private int id; // indetification of a user 
+	private String username; // choosen username
+	private int points; // scored points
+	private int[] theme; //store the ids of the choosen themes
+
+	public profile() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

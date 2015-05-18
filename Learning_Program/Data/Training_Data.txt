@@ -1,0 +1,4 @@
+Hello;Hallo;3;bonjour|hola|ciao
+World;Welt;2
+also;ebenfalls|auch;3
+also;ebenfalls|auch
