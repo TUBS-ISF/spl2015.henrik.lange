@@ -4,10 +4,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * 
- * @author Henrik's Datatyp to store all parameters for one dataset question:
+ * Datatyp to store all parameters for one dataset question:
  *         The question which should be asked answer: The correct answer(s)
  *         points: opional, if the programm need it
+ * @author Henrik Lange
  * 
  *
  */
@@ -82,6 +82,10 @@ class Dataset implements Serializable {
 
 	String getTheme() {
 		return theme;
+	}
+
+	public boolean isMultiply_choice() {
+		return multiply_choice;
 	}
 
 }

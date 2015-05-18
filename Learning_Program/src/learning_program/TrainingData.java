@@ -17,8 +17,8 @@ import java.util.Scanner;
 import java.util.StringTokenizer;
 
 /**
- * 
- * @author Henrik's Load the Database
+ * Databank with utility methods
+ * @author Henrik Lange
  *
  */
 class TrainingData {
@@ -311,6 +311,7 @@ class TrainingData {
 					String theme = sc.next();
 					databank.add(new Dataset(question, answer, points,
 							wrongAnswer, theme));
+					saveDatabank();
 				} else if (option.equals("2")) {
 					System.out.println("Soon");
 					continue;
@@ -356,17 +357,10 @@ class TrainingData {
 	private void saveDatabank() {
 		OutputStream outputStream = null;
 		try {
-			// Byteorientierten Ausgabekanal Öffnen
 			outputStream = new FileOutputStream(saveData);
-
-			// Objektausgabekanal für Serialisierung Öffnen
 			ObjectOutputStream objectOutput = new ObjectOutputStream(
 					outputStream);
-
-			// Objekte serialisiert in Datei ausgeben
 			objectOutput.writeObject(databank);
-
-			// Ausgabekanal schließen
 			objectOutput.close();
 		} catch (IOException e) {
 			e.printStackTrace();

@@ -1,7 +1,11 @@
 package learning_program;
 
 import java.util.ArrayList;
-
+/**
+ * Profile class for the user
+ * @author Henrik Lange
+ *
+ */
 public class Profile {
 	private int id; // indetification of a user
 	private String username; // choosen username

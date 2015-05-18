@@ -9,7 +9,7 @@ import java.util.Scanner;
 /**
  * Is a class for different learn methods
  * 
- * @author Henrik's
+ * @author Henrik Lange
  *
  */
 public class Learning_material {
@@ -47,10 +47,10 @@ public class Learning_material {
 	 * @param data
 	 */
 	void flashcard(Dataset data) {
-		System.out.println("Frage: "+ data.getQuestion());
+		System.out.println("Frage: " + data.getQuestion());
 		String buffer = sc.nextLine();
 		for (int i = 0; i < data.getAnswer().size(); i++) {
-			System.out.println("Antwort: "+data.getAnswer().get(i));
+			System.out.println("Antwort: " + data.getAnswer().get(i));
 		}
 	}
 
@@ -137,12 +137,22 @@ public class Learning_material {
 				System.out.println("Multiply Choice");
 				if (Configuration.topDown) {
 					for (int i = 0; i < databank.size(); i++) {
-						mutiply_choice(databank.get(i));
+						if (databank.get(i).isMultiply_choice()) {
+							mutiply_choice(databank.get(i));
+						} else {
+
+						}
+
 					}
 				} else {
 					for (int i = 0; i < databank.size(); i++) {
-						mutiply_choice(databank.get(engine
-								.randomQuestion(databank.size())));
+						Dataset buffData = databank.get(engine
+								.randomQuestion(databank.size()));
+						while (!buffData.isMultiply_choice()) {
+							buffData = databank.get(engine
+									.randomQuestion(databank.size()));
+						}
+						mutiply_choice(buffData);
 					}
 
 				}

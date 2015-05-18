@@ -3,12 +3,11 @@ package learning_program;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-class conf {
-	public static boolean oneVsM = true; // if false, than it will only compare
-											// the first entry
-	public static boolean topDown = true;
-}
-
+/**
+ * Program for learning different things, with different methods 
+ * @author Henrik Lange
+ *
+ */
 public class Learning_Program {
 
 	public static void main(String[] args) {

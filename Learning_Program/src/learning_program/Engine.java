@@ -2,7 +2,11 @@ package learning_program;
 
 import java.util.ArrayList;
 import java.util.Random;
-
+/**
+ * Behavior methods
+ * @author Henrik Lange
+ *
+ */
 public class Engine {
 	public Engine(){
 		
