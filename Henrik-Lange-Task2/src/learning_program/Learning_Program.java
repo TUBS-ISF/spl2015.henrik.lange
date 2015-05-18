@@ -23,7 +23,7 @@ public class Learning_Program {
 				try {
 					System.out.println("Hauptmenü");
 					System.out.println("[1] Lernen");
-					System.out.println("[2] Einstellung");
+					System.out.println("[2] Ein1stellung");
 					System.out.println("[3] Beenden");
 					option = sc.nextInt();
 					break;

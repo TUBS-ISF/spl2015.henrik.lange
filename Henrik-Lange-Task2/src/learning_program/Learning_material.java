@@ -200,13 +200,8 @@ public class Learning_material {
 							if (databank.get(i).getTheme().equals(choosenTheme)) {
 								if (databank.get(i).isMultiply_choice()) {
 									mutiply_choice(databank.get(i));
-								} else {
-									i--;
-								}
-							} else {
-								i--;
-							}
-
+								} 
+							} 
 						}
 					} else {
 						for (int i = 0; i < databank.size(); i++) {
