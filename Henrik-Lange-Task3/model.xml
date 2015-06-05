@@ -1,11 +1,234 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 	<featureModel chosenLayoutAlgorithm="1">
 		<struct>
-			<and abstract="true" mandatory="true" name="HenrikLangeTask3">
-				<feature name="Base"/>
+			<and abstract="true" mandatory="true" name="Learning Programm">
+				<and abstract="true" mandatory="true" name="Storage">
+					<description>
+						Speicherung von Daten
+					</description>
+					<and mandatory="true" name="Training data">
+						<description>
+							Fragen, Antworten(mehrere möglich), 
+							Falsche Antworten (wenn multiply choice gewählt)
+						</description>
+						<feature name="Choice for the theme">
+							<description>
+								Möglichkeit ein Thema zu wählen, wenn es mehrere Themen gibt
+							</description>
+						</feature>
+					</and>
+					<or abstract="true" name="Personal data">
+						<description>
+							Persöhnliche Daten rund um die Person
+						</description>
+						<feature mandatory="true" name="Profile">
+							<description>
+								Speichern von Persönlichen Daten, wie Name bzw Benutzername, falls mehrere Accounts benutzbar sind
+							</description>
+						</feature>
+						<feature mandatory="true" name="Achievements">
+							<description>
+								"Belohnungen" für gute Arbeit oder für Eifer
+							</description>
+						</feature>
+						<or abstract="true" mandatory="true" name="Statistics">
+							<description>
+								Statistiken rund um das Lernen
+							</description>
+							<feature mandatory="true" name="Learning evaluation">
+								<description>
+									Statistik über wie gut die Aufgaben bewähltigt wurden
+								</description>
+							</feature>
+							<feature mandatory="true" name="Endurance">
+								<description>
+									Statistik wie oft und lange Trainiert wurde
+								</description>
+							</feature>
+						</or>
+						<feature mandatory="true" name="Differnt accounts">
+							<description>
+								Mehrere leute können damit lernen
+							</description>
+						</feature>
+						<and mandatory="true" name="Point system">
+							<description>
+								Um ein Bewertungssystem für das Lösen zu haben
+							</description>
+							<feature name="Highscore">
+								<description>
+									Fehlerloses Lösen gibt Punkte und das kann bepunktet werden und gespeichert werden
+									
+								</description>
+							</feature>
+						</and>
+					</or>
+					<feature name="Import">
+						<description>
+							Das bewusste Importieren von zusätlichen Daten
+						</description>
+					</feature>
+					<feature name="Export">
+						<description>
+							Exportieren von Daten (Statistiken, Fragenkatalog)
+						</description>
+					</feature>
+				</and>
+				<or abstract="true" mandatory="true" name="Learning material">
+					<description>
+						Art der Lernmethoden
+					</description>
+					<feature mandatory="true" name="Flashcard">
+						<description>
+							Karteikarten System
+						</description>
+					</feature>
+					<feature mandatory="true" name="Cloze test ">
+						<description>
+							Lückentext
+						</description>
+					</feature>
+					<feature mandatory="true" name="Mutiply choice">
+						<description>
+							Auswahl Aufgaben
+						</description>
+					</feature>
+				</or>
+				<and abstract="true" mandatory="true" name="Engine">
+					<description>
+						Steuerungseinheit
+					</description>
+					<or abstract="true" mandatory="true" name="Compare methods">
+						<description>
+							Wie Eingabe mit den Antworten aus der Datenbank 
+							verglichen werden soll, hierbei kann es sein, dass mehrere Antworten
+							korrekt sind.
+						</description>
+						<feature mandatory="true" name="Compare 1 vs m">
+							<description>
+								Mehrere korrekte Antworten
+							</description>
+						</feature>
+						<feature mandatory="true" name="Compare 1 vs 1">
+							<description>
+								Eine Korrekte Antwort
+							</description>
+						</feature>
+					</or>
+					<feature name="Help">
+						<description>
+							Die Möglichkeit, eine Hilfe aufzurufen. Kann Gramatik enthalten,
+							Beispiel Aufgaben etc.
+						</description>
+					</feature>
+					<or abstract="true" name="Modus">
+						<description>
+							EInbinden von Modis um unterschiedliche anreize zu bieten.
+							Zeitdruck bei Klausuren oder ohne beim Lernen.
+						</description>
+						<feature mandatory="true" name="Learning">
+							<description>
+								kein Zeitdruck
+							</description>
+						</feature>
+						<feature mandatory="true" name="Test">
+							<description>
+								Zeitdruck beim Lösen
+							</description>
+						</feature>
+					</or>
+					<alt abstract="true" mandatory="true" name="Exercise choice">
+						<description>
+							Festlegung wie die Aufgaben aus der Datenbank ausgewählt werden soll.
+						</description>
+						<feature mandatory="true" name="Top down">
+							<description>
+								Geht die Datenbank einfach ab von oben
+							</description>
+						</feature>
+						<feature mandatory="true" name="Different types">
+							<description>
+								Versucht unterschiedliche Lern methoden auszuwählen
+							</description>
+						</feature>
+						<feature mandatory="true" name="Result from Training"/>
+					</alt>
+					<feature name="Trainer">
+						<description>
+							Motiviert und kann Themen auswählen
+						</description>
+					</feature>
+				</and>
+				<and name="GUI">
+					<description>
+						Grafische Oberfläche
+					</description>
+					<and name="Tabels with the training data">
+						<description>
+							Anzeigen der Fragen und Antworten in einer Tabelle
+						</description>
+						<feature name="Sort function">
+							<description>
+								Sortier Funktion für die Tabelle
+							</description>
+						</feature>
+					</and>
+					<and name="Profile window">
+						<description>
+							Ein Profil Fenster was Daten zur Person angibt
+						</description>
+						<feature name="Achievement collection">
+							<description>
+								Anzeigen der Erfolge
+							</description>
+						</feature>
+					</and>
+					<feature name="Graphics">
+						<description>
+							Grafische Statistiken über die Lernerfolge
+						</description>
+					</feature>
+				</and>
 			</and>
 		</struct>
-		<constraints/>
+		<constraints>
+			<rule>
+				<imp>
+					<var>Profile window</var>
+					<var>Profile</var>
+				</imp>
+			</rule>
+			<rule>
+				<imp>
+					<var>Graphics</var>
+					<var>Statistics</var>
+				</imp>
+			</rule>
+			<rule>
+				<eq>
+					<var>Differnt accounts</var>
+					<var>Profile</var>
+				</eq>
+			</rule>
+			<rule>
+				<imp>
+					<var>Result from Training</var>
+					<var>Learning evaluation</var>
+				</imp>
+			</rule>
+			<rule>
+				<imp>
+					<var>Trainer</var>
+					<var>Choice for the theme</var>
+				</imp>
+			</rule>
+			<rule>
+				<imp>
+					<var>Achievement collection</var>
+					<var>Achievements</var>
+				</imp>
+			</rule>
+		</constraints>
 		<calculations Auto="true" Constraints="true" Features="true" Redundant="true" Tautology="true"/>
 		<comments/>
 		<featureOrder userDefined="false"/>

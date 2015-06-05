@@ -1,0 +1,40 @@
+# Lists all features from the model with manual (first digit) and automatic (second digit) selection
+# 0 = deselected, 1 = selected, 2 = undefined
+21Learning Programm
+21Storage
+21Training data
+11Choice for the theme
+21Personal data
+22Profile
+22Achievements
+21Statistics
+21Learning evaluation
+22Endurance
+22Differnt accounts
+22Point system
+22Highscore
+12Import
+12Export
+21Learning material
+12Flashcard
+12Cloze test 
+12Mutiply choice
+21Engine
+21Compare methods
+12Compare 1 vs m
+12Compare 1 vs 1
+12Help
+21Modus
+12Learning
+22Test
+21Exercise choice
+20Top down
+20Different types
+12Result from Training
+12Trainer
+11GUI
+11Tabels with the training data
+12Sort function
+22Profile window
+22Achievement collection
+22Graphics
