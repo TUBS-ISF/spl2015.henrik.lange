@@ -3,12 +3,12 @@
 21Learning Programm
 21Storage
 21Training data
-12Choice for the theme
+22Choice for the theme
 21Personal data
-11Profile
-21Achievements
-11Statistics
-11Learning evaluation
+12Profile
+12Achievements
+21Statistics
+12Learning evaluation
 22Endurance
 21Differnt accounts
 22Point system
@@ -16,25 +16,25 @@
 12Import
 22Export
 21Learning material
-22Flashcard
-12Cloze test 
-12Mutiply choice
+12Flashcard
+22Cloze test 
+22Mutiply choice
 21Engine
 21Compare methods
-22Compare 1 vs m
-12Compare 1 vs 1
+12Compare 1 vs m
+22Compare 1 vs 1
 22Help
-22Modus
-22Learning
+21Modus
+12Learning
 22Test
 21Exercise choice
-20Top down
+12Top down
 20Different types
-12Result from Training
+20Result from Training
 22Trainer
 11GUI
-12Tabels with the training data
+22Tabels with the training data
 22Sort function
-11Profile window
-12Achievement collection
+22Profile window
+22Achievement collection
 12Graphics
