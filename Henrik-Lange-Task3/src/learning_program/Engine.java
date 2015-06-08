@@ -12,22 +12,28 @@ public class Engine {
 		
 	}
 	boolean useEngine(ArrayList<String> answer, String givenAnswer) {
-		if (Configuration.oneVsM) {
-			return compareAllAnswer(answer, givenAnswer);
-		} else {
-			return compareOneAnswer(answer, givenAnswer);
-		}
-
+		return compareAnswer(answer, givenAnswer);
 	}
 
-	private boolean compareAllAnswer(ArrayList<String> answer,
+	private boolean compareAnswer(ArrayList<String> answer,
 			String givenAnswer) {
-		System.out.println("All");
+		boolean isCorrect =false;
+		//#ifdef Comp1vsM
 		if (answer.contains(givenAnswer)) {
-			return true;
+			isCorrect= true;
 		} else {
-			return false;
+			isCorrect= false;
 		}
+		//#endif 
+		//#ifdef Comp1vs1
+//@		if (answer.get(0).equals(givenAnswer)) {
+//@			isCorrect= true;
+//@		} else {
+//@			isCorrect= false;
+//@		}
+		//#endif
+		
+		return isCorrect;
 	}
 
 	private boolean compareOneAnswer(ArrayList<String> answer,

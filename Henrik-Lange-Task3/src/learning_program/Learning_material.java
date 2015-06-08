@@ -69,7 +69,7 @@ public class Learning_material {
 		System.out.println(data.getQuestion());
 		ArrayList<String> answerOption = new ArrayList<String>();
 		answerOption.add(data.getAnswer().get(
-				rand.nextInt(data.getAnswer().size()))); // Wählt eine zufällige
+				rand.nextInt(data.getAnswer().size()))); // W?hlt eine zuf?llige
 															// richtige Antwort
 		String correctAnswer = answerOption.get(0);
 		answerOption.addAll(data.getWrongAnswers());
@@ -89,7 +89,7 @@ public class Learning_material {
 			} catch (InputMismatchException e) {
 				String errStr = sc.nextLine();
 				System.out.println("Bitte eine Zahl eingeben, " + errStr
-						+ " ist keine gültige!");
+						+ " ist keine g?ltige!");
 				continue;
 			}
 		}
@@ -97,52 +97,55 @@ public class Learning_material {
 			System.out.println("Die Antwort war Korrekt!");
 		} else {
 			System.out
-					.println("Die Antwort war falsch, korrekt wäre die Antwort '"
+					.println("Die Antwort war falsch, korrekt w?re die Antwort '"
 							+ correctAnswer + "'");
 		}
 
 	}
 
 	void startLearning() {
+		boolean stopLearning = false;
 		while (true) {
-			boolean stopLearning = false;
-			String newTheme = "";
-			String choosenTheme = "";
-			themeList = new List();
-			System.out.println("Waehlen Sie das Thema");
-			for (int i = 0; i < databank.size(); i++) {
-				if (!databank.get(i).getTheme().equals(newTheme)) {
-					themeList.add(databank.get(i).getTheme());
-					newTheme = databank.get(i).getTheme();
-				}
-			}
-			for (int i = 0; i < themeList.getItemCount(); i++) {
-				System.out.println("[" + (i + 1) + "] Thema: "
-						+ themeList.getItem(i));
-			}
-			System.out.println("[" + (themeList.getItemCount() + 1) + "] zurück");
-			// Themen Auswahl nur 1
-			while (true) {
-				try {
-					int choice = sc.nextInt();
-					if (choice > themeList.getItemCount() + 1 || choice <= 0) {
-						System.out.println("Zahl ist nicht im Bereich!");
-						continue;
-					}
-					if (choice == (themeList.getItemCount() + 1)) {
-						stopLearning = true;
-						break;
-					}
-					choosenTheme = themeList.getItem(choice - 1);
-					break;
-				} catch (InputMismatchException e) {
-					String errStr = sc.nextLine();
-					System.out.println("Bitte eine Zahl eingeben, " + errStr
-							+ " ist keine gültige!");
-					continue;
-				}
-			}
-
+			//#ifdef ChoiceForTheTheme
+//@			
+//@			stopLearning = false;
+//@			String newTheme = "";
+//@			String choosenTheme = "";
+//@			themeList = new List();
+//@			System.out.println("Waehlen Sie das Thema");
+//@			for (int i = 0; i < databank.size(); i++) {
+//@				if (!databank.get(i).getTheme().equals(newTheme)) {
+//@					themeList.add(databank.get(i).getTheme());
+//@					newTheme = databank.get(i).getTheme();
+//@				}
+//@			}
+//@			for (int i = 0; i < themeList.getItemCount(); i++) {
+//@				System.out.println("[" + (i + 1) + "] Thema: "
+//@						+ themeList.getItem(i));
+//@			}
+//@			System.out.println("[" + (themeList.getItemCount() + 1) + "] zur?ck");
+//@			// Themen Auswahl nur 1
+//@			while (true) {
+//@				try {
+//@					int choice = sc.nextInt();
+//@					if (choice > themeList.getItemCount() + 1 || choice <= 0) {
+//@						System.out.println("Zahl ist nicht im Bereich!");
+//@						continue;
+//@					}
+//@					if (choice == (themeList.getItemCount() + 1)) {
+//@						stopLearning = true;
+//@						break;
+//@					}
+//@					choosenTheme = themeList.getItem(choice - 1);
+//@					break;
+//@				} catch (InputMismatchException e) {
+//@					String errStr = sc.nextLine();
+//@					System.out.println("Bitte eine Zahl eingeben, " + errStr
+//@							+ " ist keine g?ltige!");
+//@					continue;
+//@				}
+//@			}
+			//#endif
 			while (true) {
 				if (stopLearning) {
 					break;
@@ -151,73 +154,116 @@ public class Learning_material {
 				System.out.println("[1] Karteikarten");
 				System.out.println("[2] Lueckentext");
 				System.out.println("[3] Multiply Choice");
-				System.out.println("[4] zurück");
+				System.out.println("[4] zur?ck");
 				String option = sc.next();
 				if (option.equals("1")) {
-					System.out.println("Karteikarten");
-					if (Configuration.topDown) {
-						for (int i = 0; i < databank.size(); i++) {
-							if (databank.get(i).getTheme().equals(choosenTheme)) {
-								flashcard(databank.get(i));
-							}
-
-						}
-					} else {
-						for (int i = 0; i < databank.size(); i++) {
-							int randQue = engine
-									.randomQuestion(databank.size());
-							if (databank.get(randQue).getTheme()
-									.equals(choosenTheme)) {
-								flashcard(databank.get(randQue));
-							} else {
-								i--;
-							}
-						}
-
-					}
+					//#ifdef Flashcard
+//@					System.out.println("Karteikarten");
+					//#ifdef TopDown
+//@					for (int i = 0; i < databank.size(); i++) {
+						//#ifdef ChoiceForTheTheme
+//@						if (databank.get(i).getTheme().equals(choosenTheme)) {
+//@							flashcard(databank.get(i));
+//@						}
+						//#else
+//@						flashcard(databank.get(i));
+						//#endif
+//@					}
+//@					
+					//#endif
+					//#ifdef Random
+//@					for (int i = 0; i < databank.size(); i++) {
+//@						int randQue = engine
+//@								.randomQuestion(databank.size());
+					//#ifdef ChoiceForTheTheme
+//@						if (databank.get(randQue).getTheme()
+//@								.equals(choosenTheme)) {
+//@							flashcard(databank.get(randQue));
+//@						} else {
+//@							i--;
+//@						}
+						//#else
+//@						flashcard(databank.get(randQue));
+						//#endif
+//@					}
+//@						
+					//#endif
+					//#else
+					System.out.println("Nicht definiert");
+					//#endif 
 				} else if (option.equals("2")) {
-					System.out.println("Lueckentext");
-					if (Configuration.topDown) {
-						for (int i = 0; i < databank.size(); i++) {
-							if (databank.get(i).getTheme().equals(choosenTheme)) {
-								choze_test(databank.get(i));
-							}
-						}
-					} else {
-						for (int i = 0; i < databank.size(); i++) {
-							int randQue = engine
-									.randomQuestion(databank.size());
-							if (databank.get(randQue).getTheme()
-									.equals(choosenTheme)) {
-								choze_test(databank.get(randQue));
-							} else {
-								i--;
-							}
-						}
-					}
+					//#ifdef ClozeTest
+//@					System.out.println("Lueckentext");
+					//#ifdef TopDown
+//@					for (int i = 0; i < databank.size(); i++) {
+						//#ifdef ChoiceForTheTheme
+//@						if (databank.get(i).getTheme().equals(choosenTheme)) {
+//@							choze_test(databank.get(i));
+//@						}
+						//#else
+//@						choze_test(databank.get(i));
+						//#endif
+//@					}					
+					//#endif
+					//#ifdef Random
+//@					for (int i = 0; i < databank.size(); i++) {
+//@						int randQue = engine
+//@								.randomQuestion(databank.size());
+					//#ifdef ChoiceForTheTheme
+//@						if (databank.get(randQue).getTheme()
+//@								.equals(choosenTheme)) {
+//@							choze_test(databank.get(randQue));
+//@						} else {
+//@							i--;
+//@						}
+					//#else
+//@						choze_test(databank.get(randQue));
+					//#endif
+//@					}	
+					//#endif
+//@				
+					//#else
+					System.out.println("Nicht definiert");
+					//#endif
 				} else if (option.equals("3")) {
+					//#ifdef MultiplyChoice
 					System.out.println("Multiply Choice");
-					if (Configuration.topDown) {
-						for (int i = 0; i < databank.size(); i++) {
-							if (databank.get(i).getTheme().equals(choosenTheme)) {
-								if (databank.get(i).isMultiply_choice()) {
-									mutiply_choice(databank.get(i));
-								} 
-							} 
-						}
-					} else {
-						for (int i = 0; i < databank.size(); i++) {
-							Dataset buffData = databank.get(engine
-									.randomQuestion(databank.size()));
-							while (!buffData.isMultiply_choice()
-									|| !buffData.getTheme()
-											.equals(choosenTheme)) {
-								buffData = databank.get(engine
-										.randomQuestion(databank.size()));
-							}
-							mutiply_choice(buffData);
-						}
+					//#ifdef TopDown
+					for (int i = 0; i < databank.size(); i++) {
+						//#ifdef ChoiceForTheTheme
+//@						if (databank.get(i).getTheme().equals(choosenTheme)) {
+//@							if (databank.get(i).isMultiply_choice()) {
+//@								mutiply_choice(databank.get(i));
+//@							} 
+//@						}
+						//#else
+						mutiply_choice(databank.get(i));
+						//#endif
 					}
+					//#endif
+					
+					//#ifdef Random
+//@					for (int i = 0; i < databank.size(); i++) {
+//@						Dataset buffData = databank.get(engine
+//@								.randomQuestion(databank.size()));
+						//#ifdef ChoiceForTheTheme
+//@						while (!buffData.isMultiply_choice()
+//@								|| !buffData.getTheme()
+//@										.equals(choosenTheme)) {
+//@							buffData = databank.get(engine
+//@									.randomQuestion(databank.size()));
+//@						}
+//@						//else
+//@						while (!buffData.isMultiply_choice(){
+//@							buffData = databank.get(engine.randomQuestion(databank.size()));
+//@						}
+						//#endif
+//@						mutiply_choice(buffData);
+//@					}
+					//#endif
+					//#else
+//@					System.out.println("Nicht definiert");
+					//#endif		
 				} else if (option.equals("4")) {
 					break;
 				} else {

@@ -142,7 +142,6 @@ public class Learning_material {
 					continue;
 				}
 			}
-
 			while (true) {
 				if (stopLearning) {
 					break;

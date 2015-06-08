@@ -17,19 +17,6 @@ public class Learning_Program {
 		Scanner sc = new Scanner(System.in);
 		// tr.importData("Data/Training_Data.txt","default");
 		// tr.exportData("Data/Training_Data_export.txt");
-		for (String arg : args) {
-			if(arg.equals("-ovm")){
-				Configuration.oneVsM=true;
-				System.out.println("oneVsM activated");
-			}else if(arg.equals("-td")){
-				Configuration.topDown=true;
-				System.out.println("topDown activated");
-			}else if(arg.equals("-help")){
-				System.out.println("-ovm, oneVsM");
-				System.out.println("-td, topDown");
-				System.exit(0);
-			}
-		}
 		while (true) {
 			int option;
 			while (true) {

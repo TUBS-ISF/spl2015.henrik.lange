@@ -1,0 +1,5 @@
+Hello;Hallo;3;bonjour|hola|ciao;sa
+World;Welt;2;;sa
+also;ebenfalls|auch;3;;sa
+also;ebenfalls|auch;0;;sa
+warum;ist|so;3;gubel|bubel|dubel;test
