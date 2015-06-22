@@ -3,10 +3,10 @@
 21LearningProgram
 21Storage
 21TrainingData
-22ChoiceForTheTheme
-22Edit
+12ChoiceForTheTheme
+11Edit
 22DeleteBib
-22DeleteEntry
+12DeleteEntry
 22PersonalData
 22Profile
 22Achievements
@@ -19,10 +19,10 @@
 21Import
 22Files
 12Individually
-22Export
+12Export
 21LearningMaterial
-22Flashcard
-22ClozeTest
+12Flashcard
+12ClozeTest
 12MultiplyChoice
 21Engine
 21CompareMethods

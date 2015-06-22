@@ -28,7 +28,7 @@
 							</feature>
 						</or>
 					</and>
-					<or abstract="true" name="PersonalData">
+					<or abstract="true" hidden="true" name="PersonalData">
 						<description>
 							store personal information
 						</description>
@@ -133,12 +133,12 @@
 							</description>
 						</feature>
 					</alt>
-					<feature abstract="true" name="Help">
+					<feature abstract="true" hidden="true" name="Help">
 						<description>
 							explanation
 						</description>
 					</feature>
-					<or abstract="true" name="Modus">
+					<or abstract="true" hidden="true" name="Modus">
 						<description>
 							option for diffrent modis
 						</description>
@@ -167,18 +167,18 @@
 								choose the question randomly
 							</description>
 						</feature>
-						<feature abstract="true" mandatory="true" name="DifferentThemes">
+						<feature abstract="true" hidden="true" mandatory="true" name="DifferentThemes">
 							<description>
 								choose diffrent themes
 							</description>
 						</feature>
-						<feature abstract="true" mandatory="true" name="ResultFromTraining">
+						<feature abstract="true" hidden="true" mandatory="true" name="ResultFromTraining">
 							<description>
 								chose question which are more difficult for the user
 							</description>
 						</feature>
 					</alt>
-					<feature abstract="true" name="Trainer">
+					<feature abstract="true" hidden="true" name="Trainer">
 						<description>
 							Motivate and coordinate how the user should learn
 						</description>

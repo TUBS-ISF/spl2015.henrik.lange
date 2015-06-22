@@ -25,8 +25,8 @@ public class Engine {
 		isCorrect = oneVsM.isCorrect(answer, givenAnswer);
 		// #endif
 		// #ifdef Comp1vs1
-		// @ ComparePlugin oneVsOne = new OneVsOne();
-		// @ isCorrect = oneVsOne.isCorrect(answer, givenAnswer);
+//@		 ComparePlugin oneVsOne = new OneVsOne();
+//@		 isCorrect = oneVsOne.isCorrect(answer, givenAnswer);
 		// #endif
 
 		return isCorrect;

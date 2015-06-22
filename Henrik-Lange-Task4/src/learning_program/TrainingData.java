@@ -141,99 +141,99 @@ class TrainingData {
 			String option = sc.next();
 			if (option.equals("1")) {
 				//#ifdef DeleteEntry
-//@				if (databank.size() > 0) {
-//@					System.out
-//@							.println("Soll ein Bereich von Eintr?gen gel?scht werden? [j] oder [n]");
-//@					option = sc.next();
-//@					if (option.equals("j")) {
-//@						printDatabank();
-//@						while (true) {
-//@							try {
-//@								System.out
-//@										.print("Geben Sie die erste Nummer des Bereiches an:");
-//@								start = sc.nextInt();
-//@								if (start > databank.size() || start < 0) {
-//@									System.out.println("Ungueltiger Bereich");
-//@									continue;
-//@								}
-//@								break;
-//@							} catch (InputMismatchException e) {
-//@								String errStr = sc.next();
-//@								System.out.println("Bitte eine Zahl eingeben, "
-//@										+ errStr + " ist keine!");
-//@								continue;
-//@							}
-//@						}
-//@						while (true) {
-//@							try {
-//@								System.out
-//@										.print("Geben Sie die letzte Nummer des Bereiches an:");
-//@								end = sc.nextInt();
-//@								if (start > end || end < 0
-//@										|| end > databank.size()) {
-//@									System.out.println("Ungueltiger Bereich");
-//@									continue;
-//@								}
-//@								break;
-//@							} catch (InputMismatchException e) {
-//@								String errStr = sc.next();
-//@								System.out.println("Bitte eine Zahl eingeben, "
-//@										+ errStr + " ist keine!");
-//@								continue;
-//@							}
-//@						}
-//@						for (int i = end; i >= start; i--) {
-//@							System.out.println(i);
-//@							databank.remove(i);
-//@							System.out.println("gel?scht" + i);
-//@						}
-//@						saveDatabank();
-//@						printDatabank();
-//@					} else if (option.equals("n")) {
-//@						// to delete more than one entry
-//@						while (true) {
-//@							printDatabank();
-//@							boolean deleteAction = true;
-//@							int entry = 0;
-//@							while (true) {
-//@								try {
-//@									System.out
-//@											.print("Geben Sie den Eintrag an der gel?scht werden soll, falls Sie fertig sind geben sie [n] ein:");
-//@									entry = sc.nextInt();
-//@									if (entry > databank.size() || entry < 0) {
-//@										System.out
-//@												.println("Ungueltiger Bereich");
-//@										continue;
-//@									}
-//@									break;
-//@								} catch (InputMismatchException e) {
-//@									String errStr = sc.next();
-//@									if (errStr.equals("n")) {
-//@										deleteAction = false;
-//@										break;
-//@									} else {
-//@										System.out
-//@												.println("Bitte eine Zahl eingeben, "
-//@														+ errStr
-//@														+ " ist keine!");
-//@										continue;
-//@									}
-//@
-//@								}
-//@							}
-//@							if (deleteAction) {
-//@								databank.remove(entry);
-//@								saveDatabank();
-//@							} else {
-//@								break;
-//@							}
-//@						}
-//@					}
-//@				} else {
-//@					System.out.println("keine Daten");
-//@				}
+				if (databank.size() > 0) {
+					System.out
+							.println("Soll ein Bereich von Eintr?gen gel?scht werden? [j] oder [n]");
+					option = sc.next();
+					if (option.equals("j")) {
+						printDatabank();
+						while (true) {
+							try {
+								System.out
+										.print("Geben Sie die erste Nummer des Bereiches an:");
+								start = sc.nextInt();
+								if (start > databank.size() || start < 0) {
+									System.out.println("Ungueltiger Bereich");
+									continue;
+								}
+								break;
+							} catch (InputMismatchException e) {
+								String errStr = sc.next();
+								System.out.println("Bitte eine Zahl eingeben, "
+										+ errStr + " ist keine!");
+								continue;
+							}
+						}
+						while (true) {
+							try {
+								System.out
+										.print("Geben Sie die letzte Nummer des Bereiches an:");
+								end = sc.nextInt();
+								if (start > end || end < 0
+										|| end > databank.size()) {
+									System.out.println("Ungueltiger Bereich");
+									continue;
+								}
+								break;
+							} catch (InputMismatchException e) {
+								String errStr = sc.next();
+								System.out.println("Bitte eine Zahl eingeben, "
+										+ errStr + " ist keine!");
+								continue;
+							}
+						}
+						for (int i = end; i >= start; i--) {
+							System.out.println(i);
+							databank.remove(i);
+							System.out.println("gel?scht" + i);
+						}
+						saveDatabank();
+						printDatabank();
+					} else if (option.equals("n")) {
+						// to delete more than one entry
+						while (true) {
+							printDatabank();
+							boolean deleteAction = true;
+							int entry = 0;
+							while (true) {
+								try {
+									System.out
+											.print("Geben Sie den Eintrag an der gel?scht werden soll, falls Sie fertig sind geben sie [n] ein:");
+									entry = sc.nextInt();
+									if (entry > databank.size() || entry < 0) {
+										System.out
+												.println("Ungueltiger Bereich");
+										continue;
+									}
+									break;
+								} catch (InputMismatchException e) {
+									String errStr = sc.next();
+									if (errStr.equals("n")) {
+										deleteAction = false;
+										break;
+									} else {
+										System.out
+												.println("Bitte eine Zahl eingeben, "
+														+ errStr
+														+ " ist keine!");
+										continue;
+									}
+
+								}
+							}
+							if (deleteAction) {
+								databank.remove(entry);
+								saveDatabank();
+							} else {
+								break;
+							}
+						}
+					}
+				} else {
+					System.out.println("keine Daten");
+				}
 			//#else
-				System.out.println("Nicht im Programm erhaeltlich");
+//@				System.out.println("Nicht im Programm erhaeltlich");
 			//#endif
 			} else if (option.equals("2")) {
 				//#ifdef Individually
@@ -325,9 +325,9 @@ class TrainingData {
 				//#endif
 			} else if (option.equals("5")) {
 				//#ifdef Export
-//@				exportData("Data/Training_Data_export.txt");
+				exportData("Data/Training_Data_export.txt");
 				//#else
-				System.out.println("Nicht in der Version enthalten!");
+//@				System.out.println("Nicht in der Version enthalten!");
 				//#endif
 			} else if (option.equals("6")) {
 				break;
