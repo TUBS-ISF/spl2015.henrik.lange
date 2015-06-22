@@ -33,7 +33,7 @@ class TrainingData {
 	private StringTokenizer answerReader;
 	private int points;
 	OutputStream outputStream = null;
-	String saveData = "data.ser"; // Destination of the savepoint
+	ImportPlugin importFile = new ImportFile();
 
 	TrainingData() {
 		// load data.ser
@@ -42,65 +42,6 @@ class TrainingData {
 
 	ArrayList<Dataset> getDatabank() {
 		return databank;
-	}
-
-	void importData(String filename, String theme) {
-		try {
-			// initiate all reader
-			FileReader datareader = new FileReader(filename);
-			BufferedReader br = new BufferedReader(datareader);
-			// Read first line
-			String data = br.readLine();
-			// test if data is empty
-			while (data != null) {
-				// delete every Object in the arraylist from answer for a new
-				// dataset
-				answer.clear();
-				// Set delimiter char
-				lineReader = new StringTokenizer(data, ";");
-				// Read first token (question)
-				question = lineReader.nextToken();
-				// The next Token is the answer and sometimes it does not give
-				// only 1 answer
-				answerReader = new StringTokenizer(lineReader.nextToken(), "|");
-				while (answerReader.countTokens() > 0) {
-					answer.add(answerReader.nextToken());
-				}
-
-				if (lineReader.countTokens() == 0) {
-					// no points or alternative wrong answer
-					ArrayList<String> buf = new ArrayList<String>();
-					databank.add(new Dataset(question, answer, 0, buf, theme));
-
-				} else if (lineReader.countTokens() == 1) {
-					// Points but no alternative wrong answer
-					ArrayList<String> buf = new ArrayList<String>();
-					databank.add(new Dataset(question, answer, Integer
-							.parseInt(lineReader.nextToken()), buf, theme));
-				} else if (lineReader.countTokens() == 2) {
-					// everything
-					int points = Integer.parseInt(lineReader.nextToken());
-					ArrayList<String> wrongAnswer = new ArrayList<String>();
-					answerReader = new StringTokenizer(lineReader.nextToken(),
-							"|");
-					while (answerReader.countTokens() > 0) {
-						wrongAnswer.add(answerReader.nextToken());
-					}
-					databank.add(new Dataset(question, answer, points,
-							wrongAnswer, theme));
-				} else {
-					// something gone wrong
-					System.out.println("unsupported number of entrys");
-				}
-				data = br.readLine();
-			}
-
-		} catch (IOException nofile) {
-			System.out.println(nofile);
-
-		}
-		// Save databank in data.ser
-		saveDatabank();
 	}
 
 	void exportData(String destination) {
@@ -296,76 +237,76 @@ class TrainingData {
 			//#endif
 			} else if (option.equals("2")) {
 				//#ifdef Individually
-//@				System.out.println("Datenbank wird veraendert");
-//@				System.out.println("[1] Daten per Hand hinzufuegen");
-//@				System.out.println("[2] Daten per Hand ver?ndern");
-//@				System.out.println("[3] zur?ck");
-//@				Scanner ssc = new Scanner(System.in);
-//@				ssc.useDelimiter("\\n");
-//@				option = sc.next();
-//@				if (option.equals("1")) {
-//@					int countAnswer;
-//@					int countWrongAnswer;
-//@					System.out.print("Frage: ");
-//@					question = ssc.nextLine();
-//@					while (true) {
-//@						try {
-//@							System.out.println("Anzahl der Antworten: ");
-//@							countAnswer = sc.nextInt();
-//@							break;
-//@						} catch (InputMismatchException e) {
-//@							String errStr = sc.next();
-//@							System.out.println("Bitte eine Zahl eingeben, "
-//@									+ errStr + " ist keine!");
-//@							continue;
-//@						}
-//@					}
-//@					for (int i = 0; i < countAnswer; i++) {
-//@						System.out.print("Antwort " + i + 1 + ": ");
-//@						answer.add(ssc.nextLine());
-//@					}
-//@
-//@					while (true) {
-//@						try {
-//@							System.out.print("Punkte: ");
-//@							points = sc.nextInt();
-//@							break;
-//@						} catch (InputMismatchException e) {
-//@							String errStr = sc.next();
-//@							System.out.println("Bitte eine Zahl eingeben, "
-//@									+ errStr + " ist keine!");
-//@							continue;
-//@						}
-//@					}
-//@					while (true) {
-//@						try {
-//@							System.out
-//@									.println("Anzahl der Falschen Antworten: ");
-//@							countWrongAnswer = sc.nextInt();
-//@							break;
-//@						} catch (InputMismatchException e) {
-//@							String errStr = sc.next();
-//@							System.out.println("Bitte eine Zahl eingeben, "
-//@									+ errStr + " ist keine!");
-//@							continue;
-//@						}
-//@					}
-//@					for (int i = 0; i < countWrongAnswer; i++) {
-//@						System.out.print("Falsche Antwort " + i + 1 + ": ");
-//@						wrongAnswer.add(ssc.nextLine());
-//@					}
-//@					System.out.print("Thema: ");
-//@					String theme = sc.next();
-//@					databank.add(new Dataset(question, answer, points,
-//@							wrongAnswer, theme));
-//@					saveDatabank();
-//@				} else if (option.equals("2")) {
-//@					System.out.println("Soon");
-//@					continue;
-//@
-//@				}
+				System.out.println("Datenbank wird veraendert");
+				System.out.println("[1] Daten per Hand hinzufuegen");
+				System.out.println("[2] Daten per Hand ver?ndern");
+				System.out.println("[3] zur?ck");
+				Scanner ssc = new Scanner(System.in);
+				ssc.useDelimiter("\\n");
+				option = sc.next();
+				if (option.equals("1")) {
+					int countAnswer;
+					int countWrongAnswer;
+					System.out.print("Frage: ");
+					question = ssc.nextLine();
+					while (true) {
+						try {
+							System.out.println("Anzahl der Antworten: ");
+							countAnswer = sc.nextInt();
+							break;
+						} catch (InputMismatchException e) {
+							String errStr = sc.next();
+							System.out.println("Bitte eine Zahl eingeben, "
+									+ errStr + " ist keine!");
+							continue;
+						}
+					}
+					for (int i = 0; i < countAnswer; i++) {
+						System.out.print("Antwort " + i + 1 + ": ");
+						answer.add(ssc.nextLine());
+					}
+
+					while (true) {
+						try {
+							System.out.print("Punkte: ");
+							points = sc.nextInt();
+							break;
+						} catch (InputMismatchException e) {
+							String errStr = sc.next();
+							System.out.println("Bitte eine Zahl eingeben, "
+									+ errStr + " ist keine!");
+							continue;
+						}
+					}
+					while (true) {
+						try {
+							System.out
+									.println("Anzahl der Falschen Antworten: ");
+							countWrongAnswer = sc.nextInt();
+							break;
+						} catch (InputMismatchException e) {
+							String errStr = sc.next();
+							System.out.println("Bitte eine Zahl eingeben, "
+									+ errStr + " ist keine!");
+							continue;
+						}
+					}
+					for (int i = 0; i < countWrongAnswer; i++) {
+						System.out.print("Falsche Antwort " + i + 1 + ": ");
+						wrongAnswer.add(ssc.nextLine());
+					}
+					System.out.print("Thema: ");
+					String theme = sc.next();
+					databank.add(new Dataset(question, answer, points,
+							wrongAnswer, theme));
+					saveDatabank();
+				} else if (option.equals("2")) {
+					System.out.println("Soon");
+					continue;
+
+				}
 				//#else
-				System.out.println("Nicht in der Version enthalten!");
+//@				System.out.println("Nicht in der Version enthalten!");
 				//#endif
 			} else if (option.equals("3")) {
 				//#ifdef DeleteBib
@@ -377,12 +318,7 @@ class TrainingData {
 				//#endif
 			} else if (option.equals("4")) {
 				//#ifdef Files
-//@				System.out.println("Import Datei einlesen");
-//@				System.out.println("Geben sie den Pfad zur Datei an: ");
-//@				String path = sc.next();
-//@				System.out.println("Geben sie das Thema an: ");
-//@				String theme = sc.next();
-//@				importData(path, theme);
+//@				importFile.importData(databank);
 //@				printDatabank();
 				//#else
 				System.out.println("Nicht in der Version enthalten!");
@@ -400,10 +336,10 @@ class TrainingData {
 	}
 
 	private void loadDatabank() {
-		File file = new File(saveData);
+		File file = new File("data.ser");
 		if (file.exists()) {
 			try {
-				FileInputStream inputStream = new FileInputStream(saveData);
+				FileInputStream inputStream = new FileInputStream("data.ser");
 				ObjectInputStream objectInput = new ObjectInputStream(
 						inputStream);
 				databank = (ArrayList<Dataset>) objectInput.readObject();
@@ -424,7 +360,7 @@ class TrainingData {
 		});
 		OutputStream outputStream = null;
 		try {
-			outputStream = new FileOutputStream(saveData);
+			outputStream = new FileOutputStream("data.ser");
 			ObjectOutputStream objectOutput = new ObjectOutputStream(
 					outputStream);
 			objectOutput.writeObject(databank);
