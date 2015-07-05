@@ -20,11 +20,11 @@ public class Engine {
 			String givenAnswer) {
 		boolean isCorrect =false;
 		//#ifdef Comp1vsM
-		if (answer.contains(givenAnswer)) {
-			isCorrect= true;
-		} else {
-			isCorrect= false;
-		}
+//@		if (answer.contains(givenAnswer)) {
+//@			isCorrect= true;
+//@		} else {
+//@			isCorrect= false;
+//@		}
 		//#endif 
 		//#ifdef Comp1vs1
 //@		if (answer.get(0).equals(givenAnswer)) {

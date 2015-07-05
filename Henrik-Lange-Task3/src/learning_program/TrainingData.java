@@ -296,76 +296,76 @@ class TrainingData {
 			//#endif
 			} else if (option.equals("2")) {
 				//#ifdef Individually
-				System.out.println("Datenbank wird veraendert");
-				System.out.println("[1] Daten per Hand hinzufuegen");
-				System.out.println("[2] Daten per Hand ver?ndern");
-				System.out.println("[3] zur?ck");
-				Scanner ssc = new Scanner(System.in);
-				ssc.useDelimiter("\\n");
-				option = sc.next();
-				if (option.equals("1")) {
-					int countAnswer;
-					int countWrongAnswer;
-					System.out.print("Frage: ");
-					question = ssc.nextLine();
-					while (true) {
-						try {
-							System.out.println("Anzahl der Antworten: ");
-							countAnswer = sc.nextInt();
-							break;
-						} catch (InputMismatchException e) {
-							String errStr = sc.next();
-							System.out.println("Bitte eine Zahl eingeben, "
-									+ errStr + " ist keine!");
-							continue;
-						}
-					}
-					for (int i = 0; i < countAnswer; i++) {
-						System.out.print("Antwort " + i + 1 + ": ");
-						answer.add(ssc.nextLine());
-					}
-
-					while (true) {
-						try {
-							System.out.print("Punkte: ");
-							points = sc.nextInt();
-							break;
-						} catch (InputMismatchException e) {
-							String errStr = sc.next();
-							System.out.println("Bitte eine Zahl eingeben, "
-									+ errStr + " ist keine!");
-							continue;
-						}
-					}
-					while (true) {
-						try {
-							System.out
-									.println("Anzahl der Falschen Antworten: ");
-							countWrongAnswer = sc.nextInt();
-							break;
-						} catch (InputMismatchException e) {
-							String errStr = sc.next();
-							System.out.println("Bitte eine Zahl eingeben, "
-									+ errStr + " ist keine!");
-							continue;
-						}
-					}
-					for (int i = 0; i < countWrongAnswer; i++) {
-						System.out.print("Falsche Antwort " + i + 1 + ": ");
-						wrongAnswer.add(ssc.nextLine());
-					}
-					System.out.print("Thema: ");
-					String theme = sc.next();
-					databank.add(new Dataset(question, answer, points,
-							wrongAnswer, theme));
-					saveDatabank();
-				} else if (option.equals("2")) {
-					System.out.println("Soon");
-					continue;
-
-				}
+//@				System.out.println("Datenbank wird veraendert");
+//@				System.out.println("[1] Daten per Hand hinzufuegen");
+//@				System.out.println("[2] Daten per Hand ver?ndern");
+//@				System.out.println("[3] zur?ck");
+//@				Scanner ssc = new Scanner(System.in);
+//@				ssc.useDelimiter("\\n");
+//@				option = sc.next();
+//@				if (option.equals("1")) {
+//@					int countAnswer;
+//@					int countWrongAnswer;
+//@					System.out.print("Frage: ");
+//@					question = ssc.nextLine();
+//@					while (true) {
+//@						try {
+//@							System.out.println("Anzahl der Antworten: ");
+//@							countAnswer = sc.nextInt();
+//@							break;
+//@						} catch (InputMismatchException e) {
+//@							String errStr = sc.next();
+//@							System.out.println("Bitte eine Zahl eingeben, "
+//@									+ errStr + " ist keine!");
+//@							continue;
+//@						}
+//@					}
+//@					for (int i = 0; i < countAnswer; i++) {
+//@						System.out.print("Antwort " + i + 1 + ": ");
+//@						answer.add(ssc.nextLine());
+//@					}
+//@
+//@					while (true) {
+//@						try {
+//@							System.out.print("Punkte: ");
+//@							points = sc.nextInt();
+//@							break;
+//@						} catch (InputMismatchException e) {
+//@							String errStr = sc.next();
+//@							System.out.println("Bitte eine Zahl eingeben, "
+//@									+ errStr + " ist keine!");
+//@							continue;
+//@						}
+//@					}
+//@					while (true) {
+//@						try {
+//@							System.out
+//@									.println("Anzahl der Falschen Antworten: ");
+//@							countWrongAnswer = sc.nextInt();
+//@							break;
+//@						} catch (InputMismatchException e) {
+//@							String errStr = sc.next();
+//@							System.out.println("Bitte eine Zahl eingeben, "
+//@									+ errStr + " ist keine!");
+//@							continue;
+//@						}
+//@					}
+//@					for (int i = 0; i < countWrongAnswer; i++) {
+//@						System.out.print("Falsche Antwort " + i + 1 + ": ");
+//@						wrongAnswer.add(ssc.nextLine());
+//@					}
+//@					System.out.print("Thema: ");
+//@					String theme = sc.next();
+//@					databank.add(new Dataset(question, answer, points,
+//@							wrongAnswer, theme));
+//@					saveDatabank();
+//@				} else if (option.equals("2")) {
+//@					System.out.println("Soon");
+//@					continue;
+//@
+//@				}
 				//#else
-//@				System.out.println("Nicht in der Version enthalten!");
+				System.out.println("Nicht in der Version enthalten!");
 				//#endif
 			} else if (option.equals("3")) {
 				//#ifdef DeleteBib

@@ -1,4 +1,4 @@
-package learning_program;
+
 
 import java.util.Scanner;
 /**

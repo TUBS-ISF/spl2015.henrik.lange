@@ -227,9 +227,9 @@ public class Learning_material {
 					//#endif
 				} else if (option.equals("3")) {
 					//#ifdef MultiplyChoice
-					System.out.println("Multiply Choice");
+//@					System.out.println("Multiply Choice");
 					//#ifdef TopDown
-					for (int i = 0; i < databank.size(); i++) {
+//@					for (int i = 0; i < databank.size(); i++) {
 						//#ifdef ChoiceForTheTheme
 //@						if (databank.get(i).getTheme().equals(choosenTheme)) {
 //@							if (databank.get(i).isMultiply_choice()) {
@@ -237,11 +237,11 @@ public class Learning_material {
 //@							} 
 //@						}
 						//#else
-						mutiply_choice(databank.get(i));
+//@						mutiply_choice(databank.get(i));
 						//#endif
-					}
+//@					}
 					//#endif
-					
+//@					
 					//#ifdef Random
 //@					for (int i = 0; i < databank.size(); i++) {
 //@						Dataset buffData = databank.get(engine
@@ -262,7 +262,7 @@ public class Learning_material {
 //@					}
 					//#endif
 					//#else
-//@					System.out.println("Nicht definiert");
+					System.out.println("Nicht definiert");
 					//#endif		
 				} else if (option.equals("4")) {
 					break;
