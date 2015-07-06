@@ -17,12 +17,6 @@ public class Learning_material {
 	Scanner sc = new Scanner(System.in);
 	ArrayList<Dataset> databank;
 	List themeList;
-	private Engine engine = new Engine();
-	
-	MaterialPlugin choze_test = new Choze_test();
-	MaterialPlugin multiply_choice = new Mutiply_choice();
-	MaterialPlugin flashcard = new Flashcard();
-	
 	
 
 	public Learning_material(ArrayList<Dataset> databank) {
@@ -33,9 +27,9 @@ public class Learning_material {
 	
 	void startLearning() {
 		boolean stopLearning = false;
-		String newTheme = "";
-		String choosenTheme = "";
 		while (true) {
+			String newTheme = "";
+			String choosenTheme = "";
 			if (conf.choiceForTheTheme) {
 				stopLearning = false;
 
@@ -103,7 +97,8 @@ public class Learning_material {
 						}
 						if (conf.random) {
 							for (int i = 0; i < databank.size(); i++) {
-								int randQue = engine.randomQuestion(databank.size());
+								int randQue = engine.randomQuestion(databank
+										.size());
 								if (conf.choiceForTheTheme) {
 									if (databank.get(randQue).getTheme()
 											.equals(choosenTheme)) {

@@ -9,9 +9,9 @@ import java.util.Scanner;
  *
  */
 public class Learning_Program {
-
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		conf config = new conf();
 		TrainingData tr = new TrainingData();
 		Learning_material lr = new Learning_material(tr.getDatabank());
 		Scanner sc = new Scanner(System.in);

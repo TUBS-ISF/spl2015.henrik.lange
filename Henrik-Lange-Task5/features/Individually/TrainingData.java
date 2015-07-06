@@ -60,67 +60,19 @@ class TrainingData {
 			Scanner sc = new Scanner(System.in);
 			String option = sc.next();
 			if (option.equals("1")) {
-				//#ifdef DeleteEntry
-				if (databank.size() > 0) {
-					System.out
-							.println("Soll ein Bereich von Eintr?gen gel?scht werden? [j] oder [n]");
-					option = sc.next();
-					if (option.equals("j")) {
-						printDatabank();
-						while (true) {
-							try {
-								System.out
-										.print("Geben Sie die erste Nummer des Bereiches an:");
-								start = sc.nextInt();
-								if (start > databank.size() || start < 0) {
-									System.out.println("Ungueltiger Bereich");
-									continue;
-								}
-								break;
-							} catch (InputMismatchException e) {
-								String errStr = sc.next();
-								System.out.println("Bitte eine Zahl eingeben, "
-										+ errStr + " ist keine!");
-								continue;
-							}
-						}
-						while (true) {
-							try {
-								System.out
-										.print("Geben Sie die letzte Nummer des Bereiches an:");
-								end = sc.nextInt();
-								if (start > end || end < 0
-										|| end > databank.size()) {
-									System.out.println("Ungueltiger Bereich");
-									continue;
-								}
-								break;
-							} catch (InputMismatchException e) {
-								String errStr = sc.next();
-								System.out.println("Bitte eine Zahl eingeben, "
-										+ errStr + " ist keine!");
-								continue;
-							}
-						}
-						for (int i = end; i >= start; i--) {
-							System.out.println(i);
-							databank.remove(i);
-							System.out.println("gel?scht" + i);
-						}
-						saveDatabank();
-						printDatabank();
-					} else if (option.equals("n")) {
-						// to delete more than one entry
-						while (true) {
+				if (conf.deleteEntry) {
+					if (databank.size() > 0) {
+						System.out
+								.println("Soll ein Bereich von Eintr?gen gel?scht werden? [j] oder [n]");
+						option = sc.next();
+						if (option.equals("j")) {
 							printDatabank();
-							boolean deleteAction = true;
-							int entry = 0;
 							while (true) {
 								try {
 									System.out
-											.print("Geben Sie den Eintrag an der gel?scht werden soll, falls Sie fertig sind geben sie [n] ein:");
-									entry = sc.nextInt();
-									if (entry > databank.size() || entry < 0) {
+											.print("Geben Sie die erste Nummer des Bereiches an:");
+									start = sc.nextInt();
+									if (start > databank.size() || start < 0) {
 										System.out
 												.println("Ungueltiger Bereich");
 										continue;
@@ -128,133 +80,185 @@ class TrainingData {
 									break;
 								} catch (InputMismatchException e) {
 									String errStr = sc.next();
-									if (errStr.equals("n")) {
-										deleteAction = false;
-										break;
-									} else {
-										System.out
-												.println("Bitte eine Zahl eingeben, "
-														+ errStr
-														+ " ist keine!");
-										continue;
-									}
-
+									System.out
+											.println("Bitte eine Zahl eingeben, "
+													+ errStr + " ist keine!");
+									continue;
 								}
 							}
-							if (deleteAction) {
-								databank.remove(entry);
-								saveDatabank();
-							} else {
-								break;
+							while (true) {
+								try {
+									System.out
+											.print("Geben Sie die letzte Nummer des Bereiches an:");
+									end = sc.nextInt();
+									if (start > end || end < 0
+											|| end > databank.size()) {
+										System.out
+												.println("Ungueltiger Bereich");
+										continue;
+									}
+									break;
+								} catch (InputMismatchException e) {
+									String errStr = sc.next();
+									System.out
+											.println("Bitte eine Zahl eingeben, "
+													+ errStr + " ist keine!");
+									continue;
+								}
+							}
+							for (int i = end; i >= start; i--) {
+								System.out.println(i);
+								databank.remove(i);
+								System.out.println("gel?scht" + i);
+							}
+							saveDatabank();
+							printDatabank();
+						} else if (option.equals("n")) {
+							// to delete more than one entry
+							while (true) {
+								printDatabank();
+								boolean deleteAction = true;
+								int entry = 0;
+								while (true) {
+									try {
+										System.out
+												.print("Geben Sie den Eintrag an der gel?scht werden soll, falls Sie fertig sind geben sie [n] ein:");
+										entry = sc.nextInt();
+										if (entry > databank.size()
+												|| entry < 0) {
+											System.out
+													.println("Ungueltiger Bereich");
+											continue;
+										}
+										break;
+									} catch (InputMismatchException e) {
+										String errStr = sc.next();
+										if (errStr.equals("n")) {
+											deleteAction = false;
+											break;
+										} else {
+											System.out
+													.println("Bitte eine Zahl eingeben, "
+															+ errStr
+															+ " ist keine!");
+											continue;
+										}
+
+									}
+								}
+								if (deleteAction) {
+									databank.remove(entry);
+									saveDatabank();
+								} else {
+									break;
+								}
 							}
 						}
+					} else {
+						System.out.println("keine Daten");
 					}
 				} else {
-					System.out.println("keine Daten");
+					System.out.println("Nicht im Programm erhaeltlich");
 				}
-			//#else
-//@				System.out.println("Nicht im Programm erhaeltlich");
-			//#endif
 			} else if (option.equals("2")) {
-				//#ifdef Individually
-				System.out.println("Datenbank wird veraendert");
-				System.out.println("[1] Daten per Hand hinzufuegen");
-				System.out.println("[2] Daten per Hand ver?ndern");
-				System.out.println("[3] zur?ck");
-				Scanner ssc = new Scanner(System.in);
-				ssc.useDelimiter("\\n");
-				option = sc.next();
-				if (option.equals("1")) {
-					int countAnswer;
-					int countWrongAnswer;
-					System.out.print("Frage: ");
-					question = ssc.nextLine();
-					while (true) {
-						try {
-							System.out.println("Anzahl der Antworten: ");
-							countAnswer = sc.nextInt();
-							break;
-						} catch (InputMismatchException e) {
-							String errStr = sc.next();
-							System.out.println("Bitte eine Zahl eingeben, "
-									+ errStr + " ist keine!");
-							continue;
+				if (conf.individually) {
+					System.out.println("Datenbank wird veraendert");
+					System.out.println("[1] Daten per Hand hinzufuegen");
+					System.out.println("[2] Daten per Hand ver?ndern");
+					System.out.println("[3] zur?ck");
+					Scanner ssc = new Scanner(System.in);
+					ssc.useDelimiter("\\n");
+					option = sc.next();
+					if (option.equals("1")) {
+						int countAnswer;
+						int countWrongAnswer;
+						System.out.print("Frage: ");
+						question = ssc.nextLine();
+						while (true) {
+							try {
+								System.out.println("Anzahl der Antworten: ");
+								countAnswer = sc.nextInt();
+								break;
+							} catch (InputMismatchException e) {
+								String errStr = sc.next();
+								System.out.println("Bitte eine Zahl eingeben, "
+										+ errStr + " ist keine!");
+								continue;
+							}
 						}
-					}
-					for (int i = 0; i < countAnswer; i++) {
-						System.out.print("Antwort " + i + 1 + ": ");
-						answer.add(ssc.nextLine());
-					}
+						for (int i = 0; i < countAnswer; i++) {
+							System.out.print("Antwort " + i + 1 + ": ");
+							answer.add(ssc.nextLine());
+						}
 
-					while (true) {
-						try {
-							System.out.print("Punkte: ");
-							points = sc.nextInt();
-							break;
-						} catch (InputMismatchException e) {
-							String errStr = sc.next();
-							System.out.println("Bitte eine Zahl eingeben, "
-									+ errStr + " ist keine!");
-							continue;
+						while (true) {
+							try {
+								System.out.print("Punkte: ");
+								points = sc.nextInt();
+								break;
+							} catch (InputMismatchException e) {
+								String errStr = sc.next();
+								System.out.println("Bitte eine Zahl eingeben, "
+										+ errStr + " ist keine!");
+								continue;
+							}
 						}
-					}
-					while (true) {
-						try {
-							System.out
-									.println("Anzahl der Falschen Antworten: ");
-							countWrongAnswer = sc.nextInt();
-							break;
-						} catch (InputMismatchException e) {
-							String errStr = sc.next();
-							System.out.println("Bitte eine Zahl eingeben, "
-									+ errStr + " ist keine!");
-							continue;
+						while (true) {
+							try {
+								System.out
+										.println("Anzahl der Falschen Antworten: ");
+								countWrongAnswer = sc.nextInt();
+								break;
+							} catch (InputMismatchException e) {
+								String errStr = sc.next();
+								System.out.println("Bitte eine Zahl eingeben, "
+										+ errStr + " ist keine!");
+								continue;
+							}
 						}
-					}
-					for (int i = 0; i < countWrongAnswer; i++) {
-						System.out.print("Falsche Antwort " + i + 1 + ": ");
-						wrongAnswer.add(ssc.nextLine());
-					}
-					System.out.print("Thema: ");
-					String theme = sc.next();
-					databank.add(new Dataset(question, answer, points,
-							wrongAnswer, theme));
-					saveDatabank();
-				} else if (option.equals("2")) {
-					System.out.println("Soon");
-					continue;
+						for (int i = 0; i < countWrongAnswer; i++) {
+							System.out.print("Falsche Antwort " + i + 1 + ": ");
+							wrongAnswer.add(ssc.nextLine());
+						}
+						System.out.print("Thema: ");
+						String theme = sc.next();
+						databank.add(new Dataset(question, answer, points,
+								wrongAnswer, theme));
+						saveDatabank();
+					} else if (option.equals("2")) {
+						System.out.println("Soon");
+						continue;
 
+					}
+				} else {
+					System.out.println("Nicht in der Version enthalten!");
 				}
-				//#else
-//@				System.out.println("Nicht in der Version enthalten!");
-				//#endif
 			} else if (option.equals("3")) {
-				//#ifdef DeleteBib
-//@				System.out.println("Die Datenbank wird geloescht");
-//@				databank.clear();
-//@				saveDatabank();
-				//#else
-				System.out.println("Nicht in der Version enthalen");
-				//#endif
+				if (conf.deleteBib) {
+					System.out.println("Die Datenbank wird geloescht");
+					databank.clear();
+					saveDatabank();
+				} else {
+					System.out.println("Nicht in der Version enthalen");
+				}
 			} else if (option.equals("4")) {
-				//#ifdef Files
-//@				importFile.importData(databank);
-//@				printDatabank();
-				//#else
-				System.out.println("Nicht in der Version enthalten!");
-				//#endif
+				if (conf.files) {
+					importFile.importData(databank);
+					printDatabank();
+				} else {
+					System.out.println("Nicht in der Version enthalten!");
+				}
 			} else if (option.equals("5")) {
-				//#ifdef Export
-				exportData("Data/Training_Data_export.txt");
-				//#else
-//@				System.out.println("Nicht in der Version enthalten!");
-				//#endif
+				if (conf.export) {
+					exportData("Data/Training_Data_export.txt");
+				} else {
+					System.out.println("Nicht in der Version enthalten!");
+				}
 			} else if (option.equals("6")) {
 				break;
 			}
 		}
 	}
-
 	private void loadDatabank() {
 		File file = new File("data.ser");
 		if (file.exists()) {

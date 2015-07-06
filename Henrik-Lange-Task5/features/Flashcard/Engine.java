@@ -1,5 +1,4 @@
 
-
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -20,11 +19,11 @@ public class Engine {
 
 	private boolean compareAnswer(ArrayList<String> answer, String givenAnswer) {
 		boolean isCorrect = false;
-		if(conf.comp1vsM){
-		ComparePlugin oneVsM = new OneVsM();
-		isCorrect = oneVsM.isCorrect(answer, givenAnswer);
+		if (conf.comp1vsM) {
+			ComparePlugin oneVsM = new OneVsM();
+			isCorrect = oneVsM.isCorrect(answer, givenAnswer);
 		}
-		if(conf.comp1vs1){
+		if (conf.comp1vs1) {
 			ComparePlugin oneVsOne = new OneVsOne();
 			isCorrect = oneVsOne.isCorrect(answer, givenAnswer);
 		}
