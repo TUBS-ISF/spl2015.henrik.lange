@@ -1,5 +1,9 @@
-Hello;Hallo;3;bonjour|hola|ciao;sa
-World;Welt;2;;sa
-also;ebenfalls|auch;3;;sa
-also;ebenfalls|auch;0;;sa
-warum;ist|so;3;gubel|bubel|dubel;test
+Hello;Hallo;3;bonjour|hola|ciao;test
+1+2;3;1;1|2|4;test
+3+4;7;1;1|2|3;test
+8+6;14;1;4|5|6;test
+16+3;19;1;1|2|3;test
+7+4;11;1;1|2|3;test
+World;Welt;2;;test
+also;ebenfalls|auch;3;;test
+also;ebenfalls|auch;0;;test
