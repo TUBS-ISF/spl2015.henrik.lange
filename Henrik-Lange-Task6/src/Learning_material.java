@@ -24,13 +24,11 @@ public class Learning_material {
 	static boolean chozeTest;
 	static boolean correctQuestion;
 	static int questionCount;
+	static String options;
 	private Engine engine = new Engine();
+	
 
 	public Learning_material(ArrayList<Dataset> databank) {
-		flashcard = false;
-		multiplyChoice = false;
-		chozeTest = false;
-		correctQuestion = true;
 		this.databank = databank;
 		// sc.useDelimiter("//n");
 	}
@@ -140,9 +138,6 @@ public class Learning_material {
 			chooseTheme();
 
 			while (true) {
-				flashcard = false;
-				multiplyChoice = false;
-				chozeTest = false;
 				correctQuestion = true;
 				if (stopLearning) {
 					break;
@@ -152,8 +147,9 @@ public class Learning_material {
 				System.out.println("[2] Lueckentext");
 				System.out.println("[3] Multiply Choice");
 				System.out.println("[4] zur?ck");
-				String option = sc.next();
-				if (option.equals("1")) {
+				
+				options = sc.next();
+				if (options.equals("1")) {
 					flashcardmode();
 					if (flashcard) {
 						for (questionCount = 0; questionCount < databank.size(); questionCount++) {
@@ -166,7 +162,7 @@ public class Learning_material {
 					} else {
 						System.out.println("Nicht definiert");
 					}
-				} else if (option.equals("2")) {
+				} else if (options.equals("2")) {
 
 					chozeTestmode();
 					if (chozeTest) {
@@ -180,7 +176,7 @@ public class Learning_material {
 					} else {
 						System.out.println("Nicht definiert");
 					}
-				} else if (option.equals("3")) {
+				} else if (options.equals("3")) {
 					MultiplyChoiceTestmode();
 					if (multiplyChoice) {
 						for (questionCount = 0; questionCount < databank.size(); questionCount++) {
@@ -193,7 +189,7 @@ public class Learning_material {
 					} else {
 						System.out.println("Nicht definiert");
 					}
-				} else if (option.equals("4")) {
+				} else if (options.equals("4")) {
 					break;
 				} else {
 					continue;
