@@ -21,8 +21,8 @@ public class Engine {
 	private boolean compareAnswer(ArrayList<String> answer, String givenAnswer) {
 		boolean isCorrect = false;
 		// #ifdef Comp1vsM
-		ComparePlugin oneVsM = new OneVsM();
-		isCorrect = oneVsM.isCorrect(answer, givenAnswer);
+//@		ComparePlugin oneVsM = new OneVsM();
+//@		isCorrect = oneVsM.isCorrect(answer, givenAnswer);
 		// #endif
 		// #ifdef Comp1vs1
 //@		 ComparePlugin oneVsOne = new OneVsOne();

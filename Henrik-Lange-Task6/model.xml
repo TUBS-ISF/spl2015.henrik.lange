@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+	<featureModel chosenLayoutAlgorithm="1">
+		<struct>
+			<and abstract="true" mandatory="true" name="LearningProgram">
+				<and abstract="true" mandatory="true" name="Storage">
+					<and abstract="true" mandatory="true" name="TrainingData">
+						<description>
+							The questions and answers
+						</description>
+						<feature name="ChoiceForTheTheme">
+							<description>
+								option to use Themes
+							</description>
+						</feature>
+						<or abstract="true" name="Edit">
+							<description>
+								Option to edit Data
+							</description>
+							<feature mandatory="true" name="DeleteBib">
+								<description>
+									Delete all training data
+								</description>
+							</feature>
+							<feature mandatory="true" name="DeleteEntry">
+								<description>
+									Delete specific entries
+								</description>
+							</feature>
+						</or>
+					</and>
+					<or abstract="true" hidden="true" name="PersonalData">
+						<description>
+							store personal information
+						</description>
+						<feature abstract="true" mandatory="true" name="Profile">
+							<description>
+								Profile for the user
+							</description>
+						</feature>
+						<feature abstract="true" mandatory="true" name="Achievements">
+							<description>
+								Achievements for complete some tasks
+							</description>
+						</feature>
+						<or abstract="true" mandatory="true" name="Statistics">
+							<description>
+								The option to create statistics
+							</description>
+							<feature abstract="true" mandatory="true" name="LearningEvaluation">
+								<description>
+									how good are you
+								</description>
+							</feature>
+							<feature abstract="true" mandatory="true" name="Endurance">
+								<description>
+									how often do you learn
+								</description>
+							</feature>
+						</or>
+						<feature abstract="true" mandatory="true" name="DifferentAccounts">
+							<description>
+								switch between other accounts
+							</description>
+						</feature>
+						<and abstract="true" mandatory="true" name="PointSystem">
+							<description>
+								a system to evaluate finished tasks
+							</description>
+							<feature abstract="true" name="Highscore">
+								<description>
+									store data about points or time for some tasks
+								</description>
+							</feature>
+						</and>
+					</or>
+					<or abstract="true" name="Import">
+						<description>
+							Option to import data
+						</description>
+						<feature mandatory="true" name="Files">
+							<description>
+								Import Data with a file
+							</description>
+						</feature>
+						<feature mandatory="true" name="Individually">
+							<description>
+								Data will be importat separetly
+							</description>
+						</feature>
+					</or>
+					<feature name="Export">
+						<description>
+							Export the Data in af file
+						</description>
+					</feature>
+				</and>
+				<or abstract="true" mandatory="true" name="LearningMaterial">
+					<description>
+						Option to use diffrent methods
+					</description>
+					<feature mandatory="true" name="Flashcard">
+						<description>
+							Show question and than the answer
+						</description>
+					</feature>
+					<feature mandatory="true" name="ClozeTest">
+						<description>
+							Show question and the user need to answer
+						</description>
+					</feature>
+					<feature mandatory="true" name="MultiplyChoice">
+						<description>
+							show question and possible answers, which the user should chose
+						</description>
+					</feature>
+				</or>
+				<and abstract="true" mandatory="true" name="Engine">
+					<description>
+						the engine which set how the program should work
+					</description>
+					<alt abstract="true" mandatory="true" name="CompareMethods">
+						<description>
+							Option how the answers should be comapered
+						</description>
+						<feature mandatory="true" name="Comp1vsM">
+							<description>
+								Compare answer with all correct answers
+							</description>
+						</feature>
+						<feature mandatory="true" name="Comp1vs1">
+							<description>
+								Compare the answer with the first correct answer
+							</description>
+						</feature>
+					</alt>
+					<feature abstract="true" hidden="true" name="Help">
+						<description>
+							explanation
+						</description>
+					</feature>
+					<or abstract="true" hidden="true" name="Modus">
+						<description>
+							option for diffrent modis
+						</description>
+						<feature abstract="true" mandatory="true" name="Learning">
+							<description>
+								without time
+							</description>
+						</feature>
+						<feature abstract="true" mandatory="true" name="Test">
+							<description>
+								under pressure
+							</description>
+						</feature>
+					</or>
+					<alt abstract="true" mandatory="true" name="ExerciseChoice">
+						<description>
+							the modis how the question should be choosen
+						</description>
+						<feature mandatory="true" name="TopDown">
+							<description>
+								all entrys in the training data begining with the first and then go down
+							</description>
+						</feature>
+						<feature mandatory="true" name="Random">
+							<description>
+								choose the question randomly
+							</description>
+						</feature>
+						<feature abstract="true" hidden="true" mandatory="true" name="DifferentThemes">
+							<description>
+								choose diffrent themes
+							</description>
+						</feature>
+						<feature abstract="true" hidden="true" mandatory="true" name="ResultFromTraining">
+							<description>
+								chose question which are more difficult for the user
+							</description>
+						</feature>
+					</alt>
+					<feature abstract="true" hidden="true" name="Trainer">
+						<description>
+							Motivate and coordinate how the user should learn
+						</description>
+					</feature>
+				</and>
+				<and abstract="true" hidden="true" name="GUI">
+					<description>
+						graphical interface
+					</description>
+					<and abstract="true" name="TabelsTrainigData">
+						<description>
+							show the training data in tables
+						</description>
+						<feature abstract="true" name="SortFunction">
+							<description>
+								sort the data in the tables
+							</description>
+						</feature>
+					</and>
+					<and abstract="true" name="ProfileWindow">
+						<description>
+							show a window with the profile data
+						</description>
+						<feature abstract="true" name="AchievementsCollection">
+							<description>
+								show a window with the finishe achievements
+							</description>
+						</feature>
+					</and>
+					<feature abstract="true" name="Graphics">
+						<description>
+							use graphics for the statistics
+						</description>
+					</feature>
+				</and>
+			</and>
+		</struct>
+		<constraints>
+			<rule>
+				<imp>
+					<var>ProfileWindow</var>
+					<var>Profile</var>
+				</imp>
+			</rule>
+			<rule>
+				<imp>
+					<var>Graphics</var>
+					<var>Statistics</var>
+				</imp>
+			</rule>
+			<rule>
+				<imp>
+					<var>DifferentAccounts</var>
+					<var>Profile</var>
+				</imp>
+			</rule>
+			<rule>
+				<imp>
+					<var>ResultFromTraining</var>
+					<var>LearningMaterial</var>
+				</imp>
+			</rule>
+			<rule>
+				<imp>
+					<var>Trainer</var>
+					<var>ChoiceForTheTheme</var>
+				</imp>
+			</rule>
+			<rule>
+				<imp>
+					<var>AchievementsCollection</var>
+					<var>Achievements</var>
+				</imp>
+			</rule>
+			<rule>
+				<imp>
+					<var>Edit</var>
+					<var>Import</var>
+				</imp>
+			</rule>
+		</constraints>
+		<calculations Auto="true" Constraints="true" Features="true" Redundant="true" Tautology="true"/>
+		<comments/>
+		<featureOrder userDefined="false"/>
+	</featureModel>

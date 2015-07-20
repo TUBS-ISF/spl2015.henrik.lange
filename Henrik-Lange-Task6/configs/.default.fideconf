@@ -1,10 +1,10 @@
 # Lists all features from the model with manual (first digit) and automatic (second digit) selection
 # 0 = deselected, 1 = selected, 2 = undefined
-21LearningProgram
+11LearningProgram
 21Storage
-21TrainingData
+11TrainingData
 12ChoiceForTheTheme
-11Edit
+21Edit
 12DeleteBib
 12DeleteEntry
 22PersonalData
@@ -16,15 +16,15 @@
 22DifferentAccounts
 22PointSystem
 22Highscore
-11Import
-12Files
-22Individually
+21Import
+22Files
+12Individually
 12Export
 21LearningMaterial
 12Flashcard
 12ClozeTest
 12MultiplyChoice
-21Engine
+11Engine
 21CompareMethods
 12Comp1vsM
 20Comp1vs1
@@ -33,8 +33,8 @@
 22Learning
 22Test
 21ExerciseChoice
-20TopDown
-12Random
+12TopDown
+20Random
 20DifferentThemes
 20ResultFromTraining
 22Trainer
